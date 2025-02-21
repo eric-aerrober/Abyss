@@ -1,21 +1,21 @@
 {
-  "name": "abyss",
-  "private": true,
-  "workspaces": [
-    "packages/app",
-    "packages/shared"
-  ],
-  "scripts": {
-    "dev": "npm run dev --workspace=packages/app",
-    "build:mac": "node scripts/generate-icons.js && npm run build:mac --workspace=packages/app",
-    "publish:mac": "npm run publish:mac --workspace=packages/app",
-    "generate-icons": "node scripts/generate-icons.js",
-    "bump": "npm run bump --workspace=packages/app",
-    "prepare": "husky"
-  },
-  "devDependencies": {
-    "husky": "^9.1.7",
-    "icon-gen": "^3.0.1",
-    "sharp": "^0.33.2"
-  }
+    "name": "abyss",
+    "private": true,
+    "workspaces": [
+        "packages/app",
+        "packages/shared"
+    ],
+    "scripts": {
+        "dev": "npm run dev --workspace=packages/app",
+        "build:mac": "node scripts/generate-icons.js && npm run build:mac --workspace=packages/app",
+        "publish:mac": "node scripts/generate-icons.js && npm run publish:mac --workspace=packages/app",
+        "generate-icons": "node scripts/generate-icons.js",
+        "bump": "npm run bump --workspace=packages/app",
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "icon-gen": "^3.0.1",
+        "sharp": "^0.33.2"
+    }
 }

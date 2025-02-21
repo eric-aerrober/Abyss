@@ -1,9 +1,3 @@
-import { ipcRenderer, contextBridge } from "electron";
-import fs from "fs";
-
-// Ensure data directory exists
-fs.mkdirSync("./data", { recursive: true });
-
 // Expose some API to the Renderer process
 function withPrototype(obj: Record<string, any>) {
     const protos = Object.getPrototypeOf(obj);

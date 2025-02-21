@@ -1,0 +1,72 @@
+{
+    "name": "@abyss/app",
+    "version": "0.0.1",
+    "description": "Abyss AI Desktop Application",
+    "author": {
+        "name": "A Developer!"
+    },
+    "main": "dist-electron/main/index.js",
+    "type": "module",
+    "engines": {
+        "node": "^18.0.0"
+    },
+    "scripts": {
+        "dev": "vite",
+        "drizzle": "drizzle-kit push:sqlite",
+        "build:mac": "vite build && electron-builder build --mac",
+        "publish:mac": "vite build && electron-builder build --mac --publish always",
+        "bump": "npm version patch",
+        "prepare": "husky"
+    },
+    "build": {
+        "appId": "com.aerrobert.abyss",
+        "productName": "Abyss",
+        "directories": {
+            "output": "dist"
+        },
+        "electronVersion": "34.2.0",
+        "files": [
+            "**/*",
+            "!**/*.ts",
+            "!*.code-workspace",
+            "!LICENSE.md",
+            "!package.json",
+            "!package-lock.json",
+            "!src/",
+            "!e2e/",
+            "!hooks/",
+            "!.angular/",
+            "!*.md",
+            "!e2e/",
+            "!docs/",
+            "!.editorconfig",
+            "!.gitignore",
+            "!.storybook/**/*"
+        ],
+        "mac": {
+            "target": [
+                "dmg"
+            ],
+            "icon": "../../build/icon.icns"
+        },
+        "publish": {
+            "provider": "github",
+            "owner": "eric-aerrober",
+            "repo": "Abyss"
+        }
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.2.1",
+        "electron": "^34.2.0",
+        "electron-builder": "^24.9.1",
+        "husky": "^9.1.7",
+        "typescript": "^5.3.3",
+        "vite": "^6.1.1",
+        "vite-plugin-electron": "^0.28.0",
+        "vite-plugin-electron-renderer": "^0.14.5"
+    },
+    "dependencies": {
+        "electron-updater": "^6.3.9",
+        "react-dom": "^18.2.0"
+    }
+}

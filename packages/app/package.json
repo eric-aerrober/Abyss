@@ -1,11 +1,11 @@
 {
     "name": "@abyss/app",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Abyss AI Desktop Application",
     "author": {
         "name": "A Developer!"
     },
-    "main": "dist-electron/main/index.js",
+    "main": "dist-electron/main/index.mjs",
     "type": "module",
     "engines": {
         "node": "^18.0.0"
@@ -25,22 +25,8 @@
         },
         "electronVersion": "34.2.0",
         "files": [
-            "**/*",
-            "!**/*.ts",
-            "!*.code-workspace",
-            "!LICENSE.md",
-            "!package.json",
-            "!package-lock.json",
-            "!src/",
-            "!e2e/",
-            "!hooks/",
-            "!.angular/",
-            "!*.md",
-            "!e2e/",
-            "!docs/",
-            "!.editorconfig",
-            "!.gitignore",
-            "!.storybook/**/*"
+            "dist/**/*",
+            "dist-electron/**/*"
         ],
         "mac": {
             "target": [

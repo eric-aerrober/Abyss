@@ -1,6 +1,6 @@
 {
     "name": "@abyss/app",
-    "version": "0.0.9",
+    "version": "0.0.7",
     "description": "Abyss AI Desktop Application",
     "author": {
         "name": "A Developer!"
@@ -31,20 +31,15 @@
         "mac": {
             "target": [
                 {
-                    "target": "dmg",
-                    "arch": [
-                        "arm64",
-                        "x64"
-                    ]
-                },
-                {
                     "target": "zip",
                     "arch": [
                         "arm64",
                         "x64"
                     ]
-                }
+                },
+                "dmg"
             ],
+            "artifactName": "${productName}-${version}-${arch}-mac.zip",
             "icon": "../../build/icon.icns"
         },
         "publish": {

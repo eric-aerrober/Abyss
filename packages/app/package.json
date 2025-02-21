@@ -15,8 +15,7 @@
         "drizzle": "drizzle-kit push:sqlite",
         "build:mac": "vite build && electron-builder build --mac",
         "publish:mac": "vite build && electron-builder build --mac --publish always",
-        "bump": "npm version patch",
-        "prepare": "husky"
+        "bump": "npm version patch"
     },
     "build": {
         "appId": "com.aerrobert.abyss",
@@ -59,7 +58,6 @@
         "@vitejs/plugin-react": "^4.2.1",
         "electron": "^34.2.0",
         "electron-builder": "^24.9.1",
-        "husky": "^9.1.7",
         "typescript": "^5.3.3",
         "vite": "^6.1.1",
         "vite-plugin-electron": "^0.28.0",

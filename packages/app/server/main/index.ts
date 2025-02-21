@@ -13,7 +13,48 @@ process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
     ? join(process.env.DIST_ELECTRON, "../public")
     : process.env.DIST;
 
+// Configure auto-updater
+autoUpdater.logger = console;
+// Enable updates in dev mode
+autoUpdater.forceDevUpdateConfig = true;
+
+// Configure GitHub as update source
+autoUpdater.setFeedURL({
+    provider: "github",
+    owner: "eric-aerrober",
+    repo: "abyss",
+    private: false,
+});
+
+// Add event listeners for update events
+autoUpdater.on("checking-for-update", () => {
+    console.log("Checking for updates...");
+});
+
+autoUpdater.on("update-available", (info) => {
+    console.log("Update available:", info);
+});
+
+autoUpdater.on("update-not-available", (info) => {
+    console.log("No updates available:", info);
+});
+
+autoUpdater.on("error", (err) => {
+    console.error("Auto-updater error:", err);
+});
+
+autoUpdater.on("download-progress", (progressObj) => {
+    console.log(
+        `Download progress - ${progressObj.percent}% (${progressObj.transferred}/${progressObj.total})`
+    );
+});
+
+autoUpdater.on("update-downloaded", (info) => {
+    console.log("Update downloaded:", info);
+});
+
 // Check for updates and notify the user
+console.log("Starting auto-updater check...");
 autoUpdater.checkForUpdatesAndNotify();
 
 if (!app.requestSingleInstanceLock()) {

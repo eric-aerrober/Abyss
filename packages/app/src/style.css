@@ -5,3 +5,16 @@
 .menuDragSection {
     -webkit-app-region: drag;
 }
+
+.rubik-glitch-regular {
+    font-family: 'Rubik Glitch', serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    @apply appearance-none outline-none;
+}
+*:focus {
+    @apply appearance-none outline-none;
+}

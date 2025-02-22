@@ -1,6 +1,6 @@
 {
     "name": "@abyss/app",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "Abyss AI Desktop Application",
     "author": {
         "name": "A Developer!"
@@ -12,11 +12,17 @@
         "drizzle": "drizzle-kit push:sqlite",
         "build:mac": "vite build && electron-builder build --mac",
         "publish:mac": "vite build && electron-builder build --mac --publish always",
-        "bump": "npm version patch"
+        "bump": "npm version patch",
+        "prisma:generate": "prisma generate",
+        "prisma:migrate": "prisma migrate dev"
     },
     "dependencies": {
+        "@prisma/client": "^6.4.1",
         "electron-updater": "^6.3.9",
+        "lucide-react": "^0.475.0",
         "react-dom": "^18.2.0",
+        "react-router": "^7.2.0",
+        "react-router-dom": "^7.2.0",
         "zustand": "^5.0.3"
     },
     "devDependencies": {
@@ -27,6 +33,7 @@
         "electron-builder": "^24.9.1",
         "postcss": "^8.5.3",
         "postcss-import": "^16.1.0",
+        "prisma": "^6.4.1",
         "tailwindcss": "^3.4.1",
         "typescript": "^5.3.3",
         "vite": "^6.1.1",

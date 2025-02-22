@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 type Particle = {
     id: number;
@@ -20,13 +20,11 @@ export const AbyssBackground: React.FC = () => {
                 duration: Math.random() * 20000 + 10000,
             };
 
-            setParticles((prev) => [...prev, newParticle]);
+            setParticles(prev => [...prev, newParticle]);
 
             // Remove particle after its animation completes
             setTimeout(() => {
-                setParticles((prev) =>
-                    prev.filter((p) => p.id !== newParticle.id)
-                );
+                setParticles(prev => prev.filter(p => p.id !== newParticle.id));
             }, newParticle.duration);
         }, 1000);
 
@@ -34,7 +32,7 @@ export const AbyssBackground: React.FC = () => {
     }, []);
 
     return (
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div className="-z-50 fixed inset-0 overflow-hidden pointer-events-none">
             {/* Inline keyframes for the upward floating animation */}
             <style>{`
         @keyframes floatUp {
@@ -49,10 +47,10 @@ export const AbyssBackground: React.FC = () => {
         }
       `}</style>
 
-            {particles.map((p) => (
+            {particles.map(p => (
                 <div
                     key={p.id}
-                    className="absolute bg-white rounded-full"
+                    className="absolute bg-text-400 rounded-full"
                     style={{
                         left: `${p.left}%`,
                         bottom: 0,

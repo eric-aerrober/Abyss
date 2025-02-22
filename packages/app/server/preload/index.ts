@@ -1,6 +1,8 @@
 // preload.js
 import { contextBridge, ipcRenderer } from "electron";
 
+import "./database-connection";
+
 contextBridge.exposeInMainWorld("updater", {
     // Trigger the update check
     checkForUpdates: () => ipcRenderer.invoke("check-for-updates"),

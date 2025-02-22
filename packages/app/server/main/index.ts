@@ -33,6 +33,8 @@ async function createWindow() {
         titleBarStyle: "customButtonsOnHover",
     });
 
+    mainWindow.webContents.openDevTools();
+
     if (url) {
         mainWindow.loadURL(url);
     } else {

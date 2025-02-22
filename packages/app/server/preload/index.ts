@@ -1,107 +1,35 @@
-// Expose some API to the Renderer process
-function withPrototype(obj: Record<string, any>) {
-    const protos = Object.getPrototypeOf(obj);
+// preload.js
+import { contextBridge, ipcRenderer } from "electron";
 
-    for (const [key, value] of Object.entries(protos)) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) continue;
+contextBridge.exposeInMainWorld("updater", {
+    // Trigger the update check
+    checkForUpdates: () => ipcRenderer.invoke("check-for-updates"),
 
-        if (typeof value === "function") {
-            obj[key] = function (...args: any) {
-                return value.call(obj, ...args);
-            };
-        } else {
-            obj[key] = value;
-        }
-    }
-    return obj;
-}
-
-// Loading animation
-function domReady(
-    condition: DocumentReadyState[] = ["complete", "interactive"]
-) {
-    return new Promise((resolve) => {
-        if (condition.includes(document.readyState)) {
-            resolve(true);
-        } else {
-            document.addEventListener("readystatechange", () => {
-                if (condition.includes(document.readyState)) {
-                    resolve(true);
-                }
-            });
-        }
-    });
-}
-
-const safeDOM = {
-    append(parent: HTMLElement, child: HTMLElement) {
-        if (!Array.from(parent.children).find((e) => e === child)) {
-            return parent.appendChild(child);
-        }
+    // Listen for the "update-available" event
+    onUpdateAvailable: (callback) => {
+        ipcRenderer.on("update-available", (event, info) => callback(info));
     },
-    remove(parent: HTMLElement, child: HTMLElement) {
-        if (Array.from(parent.children).find((e) => e === child)) {
-            return parent.removeChild(child);
-        }
+
+    onUpdateNotAvailable: (callback) => {
+        ipcRenderer.on("update-not-available", (event, info) => callback(info));
     },
-};
 
-function useLoading() {
-    const className = `loaders-css__square-spin`;
-    const styleContent = `
-@keyframes square-spin {
-  25% { transform: perspective(100px) rotateX(180deg) rotateY(0); }
-  50% { transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
-  75% { transform: perspective(100px) rotateX(0) rotateY(180deg); }
-  100% { transform: perspective(100px) rotateX(0) rotateY(0); }
-}
-.${className} > div {
-  animation-fill-mode: both;
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  animation: square-spin 3s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
-}
-.app-loading-wrap {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #282c34;
-  z-index: 9;
-}
-  `;
-    const oStyle = document.createElement("style");
-    const oDiv = document.createElement("div");
+    onUpdaterError: (callback) => {
+        ipcRenderer.on("updator-error", (event, info) => callback(info));
+    },
 
-    oStyle.id = "app-loading-style";
-    oStyle.innerHTML = styleContent;
-    oDiv.className = "app-loading-wrap";
-    oDiv.innerHTML = `<div class="${className}"><div></div></div>`;
+    // Listen for download progress events
+    onDownloadProgress: (callback) => {
+        ipcRenderer.on("download-progress", (event, progress) =>
+            callback(progress)
+        );
+    },
 
-    return {
-        appendLoading() {
-            safeDOM.append(document.head, oStyle);
-            safeDOM.append(document.body, oDiv);
-        },
-        removeLoading() {
-            safeDOM.remove(document.head, oStyle);
-            safeDOM.remove(document.body, oDiv);
-        },
-    };
-}
+    // Listen for when the update has been downloaded
+    onUpdateDownloaded: (callback) => {
+        ipcRenderer.on("update-downloaded", (event, info) => callback(info));
+    },
 
-// Initialize loading animation
-const { appendLoading, removeLoading } = useLoading();
-domReady().then(appendLoading);
-
-window.onmessage = (ev) => {
-    ev.data.payload === "removeLoading" && removeLoading();
-};
-
-// Remove loading after timeout
-setTimeout(removeLoading, 4999);
+    // Trigger the restart to install the update
+    restartToUpdate: () => ipcRenderer.invoke("restart-to-update"),
+});

@@ -14,13 +14,13 @@ export const ModelProfileViewPage = () => {
 
     const modelProfile = useDatabaseTableSubscription('ModelProfiles', async database => {
         if (!id) return null;
-        return database.table.ModelProfiles.findUnique(id);
+        return database.table.ModelConnections.findUnique(id);
     });
 
     const handleDelete = async () => {
         if (!id) return;
-        await Database.table.ModelProfiles.delete(id);
-        navigate('/model-profile');
+        await Database.table.ModelConnections.delete(id);
+        navigate('/model-connection');
     };
 
     if (!modelProfile.data) {
@@ -32,8 +32,8 @@ export const ModelProfileViewPage = () => {
             title={`Model Profile: ${modelProfile.data.name}`}
             breadcrumbs={[
                 { name: 'Home', url: '/' },
-                { name: 'Models', url: '/model-profile' },
-                { name: modelProfile.data.name, url: `/model-profile/id/${id}` },
+                { name: 'Models', url: '/model-connection' },
+                { name: modelProfile.data.name, url: `/model-connection/id/${id}` },
             ]}
         >
             <IconSection title="Profile Information" icon={Box}>
@@ -47,7 +47,7 @@ export const ModelProfileViewPage = () => {
                 />
             </IconSection>
 
-            {modelProfile.data.data && (
+            {modelProfile.data.data && Object.keys(modelProfile.data.data).length > 0 && (
                 <IconSection title="Configuration" icon={Settings}>
                     <LabelValue data={modelProfile.data.data as Record<string, any>} />
                 </IconSection>

@@ -2,7 +2,7 @@ import { contextBridge } from 'electron';
 import type { PrismaClient } from '@prisma/client';
 import { createRequire } from 'module';
 import { v4 as uuidv4 } from 'uuid';
-import { ModelProfileController } from './controllers/model-profiles';
+import { ModelConnectionController } from './controllers/model-profiles';
 
 // Setup prisma to support sqlite
 const require = createRequire(import.meta.url);
@@ -114,7 +114,7 @@ const PrismaAPI = {
 
     // Access to database tables
     table: {
-        ModelProfiles: ModelProfileController,
+        ModelConnections: ModelConnectionController,
     },
 };
 

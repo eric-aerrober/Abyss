@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model ModelProfiles {
+model ModelConnections {
   // Profile for connecting to a model
   id            String   @id @default(uuid())
   name          String

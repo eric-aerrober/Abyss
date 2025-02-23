@@ -1,25 +1,25 @@
 import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
-export const ModelProfileController = {
-    create: async (profile: Prisma.ModelProfilesCreateInput) => {
-        const result = await prisma.modelProfiles.create({ data: profile });
-        await notifyTableChanged('ModelProfiles', result.id);
+export const ModelConnectionController = {
+    create: async (Connection: Prisma.ModelConnectionsCreateInput) => {
+        const result = await prisma.modelConnections.create({ data: Connection });
+        await notifyTableChanged('ModelConnections', result.id);
         return result;
     },
-    update: async (id: string, profile: Prisma.ModelProfilesUpdateInput) => {
-        const result = await prisma.modelProfiles.update({ where: { id }, data: profile });
-        await notifyTableChanged('ModelProfiles', id);
+    update: async (id: string, Connection: Prisma.ModelConnectionsUpdateInput) => {
+        const result = await prisma.modelConnections.update({ where: { id }, data: Connection });
+        await notifyTableChanged('ModelConnections', id);
         return result;
     },
     delete: async (id: string) => {
-        await prisma.modelProfiles.delete({ where: { id } });
-        notifyTableChanged('ModelProfiles', id);
+        await prisma.modelConnections.delete({ where: { id } });
+        notifyTableChanged('ModelConnections', id);
     },
     findUnique: async (id: string) => {
-        return await prisma.modelProfiles.findUnique({ where: { id } });
+        return await prisma.modelConnections.findUnique({ where: { id } });
     },
-    findMany: async (where?: Prisma.ModelProfilesWhereInput) => {
-        return await prisma.modelProfiles.findMany({ where });
+    findMany: async (where?: Prisma.ModelConnectionsWhereInput) => {
+        return await prisma.modelConnections.findMany({ where });
     },
 };

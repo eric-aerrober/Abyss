@@ -24,14 +24,14 @@ export const ModelProfileCreatePage = () => {
 
     const navigate = useNavigate();
 
-    const handleCreateProfile = () => {
-        Database.table.ModelProfiles.create({
+    const handleCreateConnection = () => {
+        Database.table.ModelConnections.create({
             name: name,
             provider: selectedProvider,
             modelId: selectedModel,
             data: data,
         });
-        navigate('/model-profile');
+        navigate('/model-connection');
     };
 
     return (
@@ -39,8 +39,8 @@ export const ModelProfileCreatePage = () => {
             title="Create Model Profile"
             breadcrumbs={[
                 { name: 'Home', url: '/' },
-                { name: 'Models', url: '/model-profile' },
-                { name: 'Create', url: '/model-profile/create' },
+                { name: 'Models', url: '/model-connection' },
+                { name: 'Create', url: '/model-connection/create' },
             ]}
         >
             <IconSection title="Name" subtitle="The name for your model profile" icon={Box}>
@@ -78,7 +78,7 @@ export const ModelProfileCreatePage = () => {
                             config: data,
                             onConfigChange: setData,
                         })}
-                    <Button className="max-w-[300px]" onClick={handleCreateProfile}>
+                    <Button className="max-w-[300px]" onClick={handleCreateConnection}>
                         Create Profile
                     </Button>
                 </div>

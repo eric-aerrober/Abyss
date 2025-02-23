@@ -33,7 +33,7 @@ export function Sidebar() {
 
     return (
         <div className="fixed left-0 top-0 w-[150px] h-screen bg-primary-950 border-r border-primary-900 flex flex-col bg-opacity-20 pt-10">
-            <SidebarItem title="Models" icon={Box} url="/model-profile" />
+            <SidebarItem title="Models" icon={Box} url="/model-connection" />
             <div
                 className="flex flex-row gap-4 items-center justify-center bg-primary-950 rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-900 fixed bottom-0 w-[150px]"
                 onClick={() => navigate('/')}

@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "ModelProfiles" (
+CREATE TABLE "ModelConnections" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "provider" TEXT NOT NULL,

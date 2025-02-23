@@ -5,6 +5,7 @@ import { ModelProfileMainPage } from './pages/model-profile/main';
 import { AbyssBackground } from './library/layout/background';
 import { HeaderBar } from './library/layout/header-bar';
 import { ModelProfileCreatePage } from './pages/model-profile/create';
+import { ModelProfileViewPage } from './pages/model-profile/view';
 
 export function App() {
     return (
@@ -16,6 +17,7 @@ export function App() {
                     <Route path="/" element={<MainPage />} />
                     <Route path="/model-profile" element={<ModelProfileMainPage />} />
                     <Route path="/model-profile/create" element={<ModelProfileCreatePage />} />
+                    <Route path="/model-profile/id/:id" element={<ModelProfileViewPage />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
             </BrowserRouter>

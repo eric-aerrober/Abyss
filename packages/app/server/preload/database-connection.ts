@@ -57,6 +57,9 @@ export function removeRecordSubscriber(table: string, recordId: string, subscrib
 
     const tableSubscriber = subscribersById.get(table)!;
     const recordSubscribers = tableSubscriber.byRecord[recordId];
+    if (!recordSubscribers) {
+        return;
+    }
     const filteredSubscribers = recordSubscribers.filter(s => s !== subscriberId);
     tableSubscriber.byRecord[recordId] = filteredSubscribers;
 
@@ -82,6 +85,10 @@ export function notifyTableChanged(table: string, recordId?: string) {
     }
 
     const recordSubscribers = tableSubscriber.byRecord[recordId];
+    if (!recordSubscribers) {
+        return;
+    }
+
     for (const subscriberId of recordSubscribers) {
         const subscriber = subscriberRegistry.get(subscriberId);
         if (subscriber) {

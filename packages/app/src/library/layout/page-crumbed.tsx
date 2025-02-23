@@ -17,9 +17,9 @@ export const PageCrumbed = ({ children, title, breadcrumbs }: PageCrumbedProps) 
     return (
         <div className="flex flex-row items-center text-primary-200">
             <Sidebar />
-            <div className="max-w-4xl px-5 ml-[150px] mt-[20px] mb-[60px]">
-                <h1 className="text-2xl font-bold mb-2">{title}</h1>
-                <div className="flex items-center gap-2 text-sm text-primary-200 mb-8">
+            <div className="max-w-4xl w-full px-5 ml-[150px] mt-[20px] mb-[60px]">
+                <h1 className="text-xl font-bold mb-2">{title}</h1>
+                <div className="flex items-center gap-2 text-xs text-primary-200 mb-8">
                     {breadcrumbs.map((crumb, index) => (
                         <React.Fragment key={crumb.url}>
                             {index > 0 && <span>/</span>}

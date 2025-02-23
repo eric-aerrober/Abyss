@@ -8,8 +8,12 @@ import { PageCrumbed } from '../../library/layout/page-crumbed';
 import { useDatabaseTableSubscription } from '../../state/database-connection';
 
 function ModelProfileCard({ model }: { model: ModelProfiles }) {
+    const navigate = useNavigate();
     return (
-        <div className="flex flex-col gap-1 bg-bg-secondary p-2 rounded-sm border border-transparent hover:border-primary-300 transition-colors cursor-pointer">
+        <div
+            className="flex flex-col gap-1 bg-bg-secondary p-2 rounded-sm border border-transparent hover:border-primary-300 transition-colors cursor-pointer"
+            onClick={() => navigate(`/model-profile/id/${model.id}`)}
+        >
             <div className="text-text-400">{model.name}</div>
             <div className="text-text-500">{model.provider}</div>
         </div>
@@ -39,6 +43,7 @@ export const ModelProfileMainPage = () => {
                 {ModelProfiles.data?.map(model => (
                     <ModelProfileCard key={model.id} model={model} />
                 ))}
+                {ModelProfiles.data?.length === 0 && <div className="text-text-500">No model profiles found</div>}
             </IconSection>
         </PageCrumbed>
     );

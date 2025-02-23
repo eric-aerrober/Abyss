@@ -11,7 +11,7 @@ interface SidebarItemProps {
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url }) => {
     const location = useLocation();
-    const isActive = location.pathname === url;
+    const isActive = location.pathname.startsWith(url);
 
     return (
         <Link

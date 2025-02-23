@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageCrumbed } from '../../library/layout/page-crumbed';
-import { Button, IconButton } from '../../library/input/button';
+import { Button } from '../../library/input/button';
 import { Box, Globe, Settings } from 'lucide-react';
 import { OpenAIConfig } from './connectors/openai';
 import { IconSection } from '../../library/layout/icon-section';
@@ -48,7 +48,7 @@ export const ModelProfileCreatePage = () => {
             </IconSection>
 
             <IconSection title="Provider" subtitle="Select the provider for your model connection" icon={Globe}>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-5 gap-3">
                     {Providers.map(provider => (
                         <Button
                             key={provider.name}

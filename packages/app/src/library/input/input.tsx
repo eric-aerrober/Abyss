@@ -15,7 +15,7 @@ interface InputProps {
 export const Input = ({ value, onChange, label, placeholder, type = 'text', options }: InputProps) => {
     return (
         <div className="mb-4">
-            {label && <label className="block text-sm font-medium text-text-700 mb-2">{label}</label>}
+            {label && <label className="block text-sm font-medium text-text-300 mb-2">{label}</label>}
             <input
                 type={type}
                 value={value}

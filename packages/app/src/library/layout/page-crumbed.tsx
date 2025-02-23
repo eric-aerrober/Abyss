@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Sidebar } from './sidebar';
 
 interface Breadcrumb {
     name: string;
@@ -14,8 +15,9 @@ interface PageCrumbedProps {
 
 export const PageCrumbed = ({ children, title, breadcrumbs }: PageCrumbedProps) => {
     return (
-        <div className="flex flex-col items-center h-full mt-5 text-primary-200">
-            <div className="w-full max-w-4xl px-5">
+        <div className="flex flex-row items-center text-primary-200">
+            <Sidebar />
+            <div className="max-w-4xl px-5 ml-[150px] mt-[20px] mb-[60px]">
                 <h1 className="text-2xl font-bold mb-2">{title}</h1>
                 <div className="flex items-center gap-2 text-sm text-primary-200 mb-8">
                     {breadcrumbs.map((crumb, index) => (

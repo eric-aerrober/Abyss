@@ -4,11 +4,21 @@
 
 @layer base {
     html[data-theme='abyss'] {
-        --color-primary: 255, 39, 46;
+        --color-background-light: #1f2862;
+        --color-background-base: #03061b;
+        --color-background-dark: #00030f;
+
+        --color-primary-light: #19215e;
+        --color-primary-base: #0e57c3;
+        --color-primary-dark: #080f41;
+
+        --color-text-light: rgb(242, 235, 235);
+        --color-text-base: rgb(163, 168, 182);
+        --color-text-dark: rgb(120, 123, 134);
     }
 
     html[data-theme='etherial'] {
-        --color-primary: 20, 255, 42;
+        --color-background-base: 20, 255, 42;
     }
 }
 

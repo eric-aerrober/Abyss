@@ -9,7 +9,7 @@ interface DatabaseTableProps {
 export function TableKeyValue({ table, column, value }: { table: string; column: string; value: string }) {
     if (column === 'threadId') {
         return (
-            <Link to={`/database/id/messageThread/record/${value}`} className="text-primary-400 underline hover:text-primary-200">
+            <Link to={`/database/id/messageThread/record/${value}`} className="text-text-base underline hover:text-text-light">
                 {value}
             </Link>
         );
@@ -17,7 +17,7 @@ export function TableKeyValue({ table, column, value }: { table: string; column:
 
     if (column === 'id') {
         return (
-            <Link to={`/database/id/${table}/record/${value}`} className="text-primary-400 underline hover:text-primary-200">
+            <Link to={`/database/id/${table}/record/${value}`} className="text-text-base underline hover:text-text-light">
                 {value}
             </Link>
         );
@@ -45,12 +45,12 @@ export function DatabaseTable({ table, records }: DatabaseTableProps) {
     const columns = Object.keys(records[0]);
 
     return (
-        <div className="overflow-x-auto border border-primary-800/50 rounded-sm">
-            <table className="w-full border-collapse text-xs overflow-hidden rounded-sm border border-primary-800/50">
+        <div className="overflow-x-auto border border-background-light rounded-sm text-text-dark">
+            <table className="w-full border-collapse text-xs overflow-hidden rounded-sm border">
                 <thead>
-                    <tr className="bg-primary-950/20 capitalize">
+                    <tr className="capitalize bg-background-dark">
                         {columns.map((column, colIndex) => (
-                            <th key={column} className="p-1.5 text-left text-text-200 font-medium border border-primary-800/50">
+                            <th key={column} className="p-1.5 text-left text-text-200 font-medium border-b border-background-light">
                                 {column}
                             </th>
                         ))}
@@ -60,11 +60,11 @@ export function DatabaseTable({ table, records }: DatabaseTableProps) {
                     {records.map((record, rowIndex) => (
                         <tr
                             key={rowIndex}
-                            className="hover:bg-primary-900/30 cursor-pointer truncate"
+                            className="hover:bg-background-light cursor-pointer truncate"
                             onClick={() => navigate(`/database/id/${table}/record/${record.id}`)}
                         >
                             {columns.map((column, colIndex) => (
-                                <td key={column} className="p-1.5 border border-primary-800/50 text-text-300 max-w-[100px] truncate">
+                                <td key={column} className="p-1.5 text-text-300 max-w-[100px] truncate">
                                     <TableKeyValue table={table} column={column} value={record[column]} />
                                 </td>
                             ))}

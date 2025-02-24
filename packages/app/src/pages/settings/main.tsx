@@ -39,8 +39,6 @@ export function SettingsPage() {
                     ]}
                 />
             </IconSection>
-
-            <div className="border border-themed">testing</div>
         </PageCrumbed>
     );
 }

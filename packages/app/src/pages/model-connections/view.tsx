@@ -33,7 +33,7 @@ export function ModelProfileViewPage() {
             breadcrumbs={[
                 { name: 'Home', url: '/' },
                 { name: 'Models', url: '/model-connection' },
-                { name: modelProfile.data.name, url: `/model-connection/id/${id}` },
+                { name: modelProfile.data.id, url: `/model-connection/id/${id}` },
             ]}
         >
             <IconSection title="Profile Information" icon={Box}>

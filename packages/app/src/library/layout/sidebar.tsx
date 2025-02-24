@@ -21,8 +21,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url, open 
             to={url}
             className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] mb-1 ${
                 isActive
-                    ? 'bg-primary-900/50 text-primary-300 border-r-2 border-primary-300'
-                    : 'text-text-300 hover:bg-primary-950 hover:text-text-200'
+                    ? 'bg-primary-base border-r-2 border-text-base'
+                    : 'text-text-300 opacity-70 hover:opacity-100 hover:bg-primary-950 hover:text-text-200'
             }`}
         >
             <Icon size={open ? 16 : 18} />
@@ -56,7 +56,7 @@ export function Sidebar() {
 
     return (
         <div
-            className={`relative left-0 top-0 h-screen bg-primary-900/20  border-r border-primary-900 flex flex-col pt-10 ${
+            className={`relative left-0 top-0 h-screen bg-background-dark border-r border-background-light flex flex-col pt-10 ${
                 isSidebarOpen ? 'min-w-[150px]' : 'w-[35px]'
             }`}
         >
@@ -69,7 +69,7 @@ export function Sidebar() {
             <SidebarItem title="Settings" icon={Settings} url="/settings" open={isSidebarOpen} />
 
             <div
-                className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center bg-primary-950 rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-900 w-full
+                className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-light w-full
                 }`}
                 onClick={e => {
                     e.stopPropagation();

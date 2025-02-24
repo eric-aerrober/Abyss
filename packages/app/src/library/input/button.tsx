@@ -14,8 +14,8 @@ export const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, onClick, cla
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`p-1 text-text-500 border border-text-900 rounded-sm transition-colors flex gap-2 items-center ${
-                disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-300 hover:text-primary-300'
+            className={`p-1 px-3 border border-primary-light rounded-sm transition-colors flex gap-3 items-center ${
+                disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-base hover:text-text-light'
             } ${className}`}
         >
             <Icon size={18} />
@@ -37,12 +37,12 @@ export const Button: React.FC<ButtonProps> = ({ onClick, className = '', childre
         <button
             onClick={onClick}
             disabled={disabled}
-            className={` text-sm px-3 py-1 text-text-300 border border-text-300 rounded transition-colors ${
+            className={` text-sm px-3 py-1 border border-primary-light rounded transition-colors ${
                 disabled
                     ? 'opacity-50 cursor-not-allowed'
                     : selected
-                    ? 'border-primary-200 text-primary-200 bg-primary-900/20'
-                    : 'hover:text-primary-200'
+                    ? 'border-primary-base text-text-light bg-background-dark'
+                    : 'hover:text-text-light hover:border-primary-base'
             } ${className}`}
         >
             {children}

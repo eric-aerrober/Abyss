@@ -16,14 +16,14 @@ import { SettingsPage } from './pages/settings/main';
 import { useDatabaseRecordSubscription, useDatabaseTableSubscription } from './state/database-connection';
 
 export function App() {
+    // Apply app theming
     const userSettings = useDatabaseTableSubscription('UserSettings', db => db.table.userSettings.get());
-
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', userSettings.data?.theme || '');
     }, [userSettings.data?.theme]);
 
     return (
-        <div className={userSettings.data?.theme || ''}>
+        <div className={`${userSettings.data?.theme || ''} text-text-base`}>
             <HeaderBar />
             <AbyssBackground />
             <BrowserRouter>

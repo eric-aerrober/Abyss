@@ -26,13 +26,13 @@ export const AbyssBackground: React.FC = () => {
             setTimeout(() => {
                 setParticles(prev => prev.filter(p => p.id !== newParticle.id));
             }, newParticle.duration);
-        }, 1000);
+        }, 500);
 
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="-z-50 fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="-z-50 fixed inset-0 overflow-hidden pointer-events-none bg-background-base">
             {/* Inline keyframes for the upward floating animation */}
             <style>{`
         @keyframes floatUp {
@@ -50,7 +50,7 @@ export const AbyssBackground: React.FC = () => {
             {particles.map(p => (
                 <div
                     key={p.id}
-                    className="absolute bg-text-400 rounded-full"
+                    className="absolute bg-primary-base rounded-full"
                     style={{
                         left: `${p.left}%`,
                         bottom: 0,

@@ -29,9 +29,7 @@ const SidebarItem: React.FC<SidebarItemData> = ({ title, icon: Icon, url }) => {
         <Link
             to={url}
             className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] ${
-                isActive
-                    ? 'bg-primary-900/20 text-primary-300 border-r-2 border-primary-300'
-                    : 'text-text-300 hover:bg-primary-950 hover:text-text-200'
+                isActive ? 'bg-primary-900/20 text-primary-300 bg-background-light' : 'opacity-50 hover:opacity-100 hover:text-text-base'
             }`}
         >
             <Icon size={16} />
@@ -40,29 +38,18 @@ const SidebarItem: React.FC<SidebarItemData> = ({ title, icon: Icon, url }) => {
     );
 };
 
-const SidebarSection: React.FC<SidebarSectionData> = ({ title, items }) => {
-    return (
-        <div className="flex flex-col gap-1">
-            <div className="text-text-500 text-xs rounded-sm py-1 mt-5 mb-1 px-2">{title}</div>
-            {items.map((item, index) => (
-                <SidebarItem key={index} {...item} />
-            ))}
-        </div>
-    );
-};
-
 export function PageSidebar({ items, children, header }: PageSidebarProps) {
     return (
-        <div className="flex flex-row text-primary-200">
+        <div className="flex flex-row">
             <Sidebar />
-            <div className="left-0 top-0 w-[250px] h-screen border-r border-primary-900 flex flex-col bg-primary-900/10 gap-1">
+            <div className="left-0 top-0 w-[250px] h-screen border-r border-background-light flex flex-col gap-1 bg-background-dark">
                 {header}
                 {items.map((item, index) => (
                     <SidebarItem key={index} {...item} />
                 ))}
                 {items.length === 0 && (
                     <div className="flex flex-col gap-1">
-                        <div className="text-text-500 text-xs rounded-sm py-1 mt-5 mb-1 px-2 text-center">Nothing here yet</div>
+                        <div className="text-xs rounded-sm py-1 mt-5 mb-1 px-2 text-center">Nothing here yet</div>
                     </div>
                 )}
             </div>

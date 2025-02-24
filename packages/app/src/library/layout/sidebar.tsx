@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Box, ChevronLeft, ChevronRight, DatabaseIcon, MessageSquare, type LucideIcon } from 'lucide-react';
+import { Box, ChevronLeft, ChevronRight, DatabaseIcon, MessageSquare, Settings, type LucideIcon } from 'lucide-react';
 import { useDatabaseQuery, useDatabaseRecordSubscription, useDatabaseTableSubscription } from '../../state/database-connection';
 import { Database } from '../../main';
 
@@ -66,6 +66,7 @@ export function Sidebar() {
             <SidebarSection title="Configuration" open={isSidebarOpen} />
             <SidebarItem title="Models" icon={Box} url="/model-connection" open={isSidebarOpen} />
             <SidebarItem title="Storage" icon={DatabaseIcon} url="/database" open={isSidebarOpen} />
+            <SidebarItem title="Settings" icon={Settings} url="/settings" open={isSidebarOpen} />
 
             <div
                 className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center bg-primary-950 rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-900 w-full

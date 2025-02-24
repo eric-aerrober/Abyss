@@ -30,6 +30,7 @@ model UserSettings {
   id            String   @id @default("default")
   sidebarOpen   Boolean  @default(false)
   lastPage      String?
+  theme         String? 
 }
 
 // A chat with someone

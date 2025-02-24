@@ -12,6 +12,7 @@ import { ChatViewPage } from './pages/chats/view';
 import { ListTablesPage } from './pages/database/list-tables';
 import { ViewTablePage } from './pages/database/view-table';
 import { ViewTableRecordPage } from './pages/database/view-table-record';
+import { SettingsPage } from './pages/settings/main';
 
 export function App() {
     return (
@@ -21,6 +22,7 @@ export function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<MainPage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
                     <Route path="/model-connection" element={<ModelProfileMainPage />} />
                     <Route path="/model-connection/create" element={<ModelProfileCreatePage />} />
                     <Route path="/model-connection/id/:id" element={<ModelProfileViewPage />} />

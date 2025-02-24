@@ -16,7 +16,7 @@ interface SidebarSectionData {
 }
 
 interface PageSidebarProps {
-    sections: SidebarSectionData[];
+    items: SidebarItemData[];
     children: React.ReactNode;
     header?: React.ReactNode;
 }
@@ -51,22 +51,22 @@ const SidebarSection: React.FC<SidebarSectionData> = ({ title, items }) => {
     );
 };
 
-export function PageSidebar({ sections, children, header }: PageSidebarProps) {
+export function PageSidebar({ items, children, header }: PageSidebarProps) {
     return (
         <div className="flex flex-row text-primary-200">
             <Sidebar />
-            <div className="left-0 top-0 w-[250px] h-screen border-r border-primary-900 flex flex-col bg-primary-900/10">
+            <div className="left-0 top-0 w-[250px] h-screen border-r border-primary-900 flex flex-col bg-primary-900/10 gap-1">
                 {header}
-                {sections.map((section, index) => (
-                    <SidebarSection key={index} {...section} />
+                {items.map((item, index) => (
+                    <SidebarItem key={index} {...item} />
                 ))}
-                {sections.length === 0 && (
+                {items.length === 0 && (
                     <div className="flex flex-col gap-1">
                         <div className="text-text-500 text-xs rounded-sm py-1 mt-5 mb-1 px-2 text-center">Nothing here yet</div>
                     </div>
                 )}
             </div>
-            <div className="w-full h-full px-5 mt-[20px] mb-[60px]">{children}</div>
+            <div className="w-full h-full mb-[60px]">{children}</div>
         </div>
     );
 }

@@ -21,17 +21,22 @@ export function ChatCreatePage() {
 
     const handleSubmit = async () => {
         if (selectedModel && message) {
-            const thread = await Database.table.chat.createWithThread({
+            const chatRecord = await Database.table.chat.createWithThread({
                 name: 'New Chat',
                 partyA: selectedModel,
                 partyB: 'USER',
             });
-            navigate(`/chats/id/${thread.threadId}`);
+            const messageRecord = await Database.table.messageThread.addMessage(chatRecord.id, {
+                role: 'USER',
+                source: 'USER',
+                content: message,
+            });
+            navigate(`/chats/id/${chatRecord.id}`);
         }
     };
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 p-5">
             <div className="text-xl font-bold">Start new chat</div>
             <Select
                 label="Choose what to chat with"

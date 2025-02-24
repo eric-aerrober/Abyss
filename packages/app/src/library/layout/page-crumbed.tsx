@@ -12,12 +12,13 @@ interface PageCrumbedProps {
     title: string;
     breadcrumbs: Breadcrumb[];
     fullWidth?: boolean;
+    hideSidebar?: boolean;
 }
 
-export const PageCrumbed = ({ children, title, breadcrumbs, fullWidth }: PageCrumbedProps) => {
+export const PageCrumbed = ({ children, title, breadcrumbs, fullWidth, hideSidebar }: PageCrumbedProps) => {
     return (
         <div className="flex flex-row  text-primary-200">
-            <Sidebar />
+            {!hideSidebar && <Sidebar />}
             <div className={`w-full px-5 mt-[20px] mb-[60px] mx-auto h-full ${!fullWidth && 'max-w-4xl'}`}>
                 <h1 className="text-xl font-bold mb-2">{title}</h1>
                 <div className="flex items-center gap-2 text-xs text-primary-200 mb-8">
@@ -26,7 +27,7 @@ export const PageCrumbed = ({ children, title, breadcrumbs, fullWidth }: PageCru
                             {index > 0 && <span>/</span>}
                             <Link
                                 to={crumb.url}
-                                className={`hover:text-primary-400 hover:underline ${
+                                className={`hover:text-primary-400 hover:underline capitalize ${
                                     index === breadcrumbs.length - 1 ? 'opacity-50 pointer-events-none' : ''
                                 }`}
                             >

@@ -23,7 +23,7 @@ export function TableKeyValue({ table, column, value }: { table: string; column:
         );
     }
 
-    if (!value.toString().includes('Object')) {
+    if (value && !value.toString().includes('Object')) {
         return value.toString();
     }
 
@@ -45,7 +45,7 @@ export function DatabaseTable({ table, records }: DatabaseTableProps) {
     const columns = Object.keys(records[0]);
 
     return (
-        <div className="w-full overflow-x-auto border border-primary-800/50 rounded-sm">
+        <div className="overflow-x-auto border border-primary-800/50 rounded-sm">
             <table className="w-full border-collapse text-xs overflow-hidden rounded-sm border border-primary-800/50">
                 <thead>
                     <tr className="bg-primary-950/20 capitalize">
@@ -64,7 +64,7 @@ export function DatabaseTable({ table, records }: DatabaseTableProps) {
                             onClick={() => navigate(`/database/id/${table}/record/${record.id}`)}
                         >
                             {columns.map((column, colIndex) => (
-                                <td key={column} className="p-1.5 border border-primary-800/50 text-text-300">
+                                <td key={column} className="p-1.5 border border-primary-800/50 text-text-300 max-w-[100px] truncate">
                                     <TableKeyValue table={table} column={column} value={record[column]} />
                                 </td>
                             ))}

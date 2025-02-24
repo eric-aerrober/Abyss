@@ -28,6 +28,7 @@ export function ChatViewPage() {
                 { name: 'Chats', url: '/chats' },
                 { name: chat.chat.name, url: `/chats/id/${id}` },
             ]}
+            hideSidebar
         >
             123
         </PageCrumbed>

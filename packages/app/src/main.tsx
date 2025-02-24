@@ -8,11 +8,15 @@ import type { PrismaAPI } from '../server/preload/database-connection';
 export const Database = window.prisma as PrismaAPI;
 
 // Listen for URL changes and log them
+let lastPage = window.location.pathname;
 if (typeof window !== 'undefined') {
     const logPageChange = () => {
-        Database.table.userSettings.update({
-            lastPage: window.location.pathname,
-        });
+        if (lastPage !== window.location.pathname) {
+            Database.table.userSettings.update({
+                lastPage: window.location.pathname,
+            });
+            lastPage = window.location.pathname;
+        }
     };
     setInterval(logPageChange, 1000);
 }

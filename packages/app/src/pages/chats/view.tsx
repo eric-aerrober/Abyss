@@ -14,8 +14,6 @@ export function ChatViewPage() {
     const navigate = useNavigate();
     const chat = useChatWithModel(id || '');
 
-    console.log(chat, id);
-
     if (chat.loading || !chat.chat) {
         return <div>Loading...</div>;
     }

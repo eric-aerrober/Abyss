@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: 'class',
+    darkMode: 'variant',
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './node_modules/@tremor/**/*.{js,ts,jsx,tsx}'],
     theme: {
         extend: {
             colors: {
+                themed: 'rgb(var(--color-primary))',
                 primary: {
                     50: '#ecf4ff',
                     100: '#dceaff',

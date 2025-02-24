@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html[data-theme='abyss'] {
+        --color-primary: 255, 39, 46;
+    }
+
+    html[data-theme='etherial'] {
+        --color-primary: 20, 255, 42;
+    }
+}
+
 .menuDragSection {
     -webkit-app-region: drag;
 }

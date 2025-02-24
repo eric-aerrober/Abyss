@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { MainPage } from './pages/main';
 import { AbyssBackground } from './library/layout/background';
@@ -13,10 +13,17 @@ import { ListTablesPage } from './pages/database/list-tables';
 import { ViewTablePage } from './pages/database/view-table';
 import { ViewTableRecordPage } from './pages/database/view-table-record';
 import { SettingsPage } from './pages/settings/main';
+import { useDatabaseRecordSubscription, useDatabaseTableSubscription } from './state/database-connection';
 
 export function App() {
+    const userSettings = useDatabaseTableSubscription('UserSettings', db => db.table.userSettings.get());
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', userSettings.data?.theme || '');
+    }, [userSettings.data?.theme]);
+
     return (
-        <div>
+        <div className={userSettings.data?.theme || ''}>
             <HeaderBar />
             <AbyssBackground />
             <BrowserRouter>

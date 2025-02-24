@@ -11,13 +11,14 @@ interface PageCrumbedProps {
     children: React.ReactNode;
     title: string;
     breadcrumbs: Breadcrumb[];
+    fullWidth?: boolean;
 }
 
-export const PageCrumbed = ({ children, title, breadcrumbs }: PageCrumbedProps) => {
+export const PageCrumbed = ({ children, title, breadcrumbs, fullWidth }: PageCrumbedProps) => {
     return (
         <div className="flex flex-row  text-primary-200">
             <Sidebar />
-            <div className="max-w-4xl w-full px-5 mt-[20px] mb-[60px] mx-auto h-full">
+            <div className={`w-full px-5 mt-[20px] mb-[60px] mx-auto h-full ${!fullWidth && 'max-w-4xl'}`}>
                 <h1 className="text-xl font-bold mb-2">{title}</h1>
                 <div className="flex items-center gap-2 text-xs text-primary-200 mb-8">
                     {breadcrumbs.map((crumb, index) => (

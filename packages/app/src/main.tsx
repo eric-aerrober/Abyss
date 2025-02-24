@@ -7,8 +7,25 @@ import type { PrismaAPI } from '../server/preload/database-connection';
 // @ts-ignore
 export const Database = window.prisma as PrismaAPI;
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-);
+// Listen for URL changes and log them
+if (typeof window !== 'undefined') {
+    const logPageChange = () => {
+        Database.table.userSettings.update({
+            lastPage: window.location.pathname,
+        });
+    };
+    setInterval(logPageChange, 1000);
+}
+
+// Set initial page
+Database.table.userSettings.get().then(settings => {
+    if (settings.lastPage) {
+        window.history.pushState({}, '', settings.lastPage);
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')!).render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    );
+});

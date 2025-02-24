@@ -22,7 +22,7 @@ function ModelProfileCard({ model }: { model: ModelConnections }) {
 
 export function ModelProfileMainPage() {
     // Subscribe to the model profiles table and get the data whenever it changes
-    const ModelProfiles = useDatabaseTableSubscription('ModelConnections', async database => database.table.ModelConnections.findMany());
+    const ModelProfiles = useDatabaseTableSubscription('ModelConnections', async database => database.table.modelConnections.scanTable());
 
     // Navigate to the model profile page
     const navigate = useNavigate();

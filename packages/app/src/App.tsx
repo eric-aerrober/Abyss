@@ -9,6 +9,9 @@ import { ModelProfileViewPage } from './pages/model-connections/view';
 import { ChatMainPage } from './pages/chats/main';
 import { ChatCreatePage } from './pages/chats/create';
 import { ChatViewPage } from './pages/chats/view';
+import { ListTablesPage } from './pages/database/list-tables';
+import { ViewTablePage } from './pages/database/view-table';
+import { ViewTableRecordPage } from './pages/database/view-table-record';
 
 export function App() {
     return (
@@ -25,6 +28,9 @@ export function App() {
                         <Route path="/chats/create" element={<ChatCreatePage />} />
                         <Route path="/chats/id/:id" element={<ChatViewPage />} />
                     </Route>
+                    <Route path="/database" element={<ListTablesPage />} />
+                    <Route path="/database/id/:id" element={<ViewTablePage />} />
+                    <Route path="/database/id/:id/record/:recordId" element={<ViewTableRecordPage />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
             </BrowserRouter>

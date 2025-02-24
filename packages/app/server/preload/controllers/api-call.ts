@@ -2,6 +2,12 @@ import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
 export const ApiCallController = {
+    scanTable: async () => {
+        return await prisma.apiCall.findMany();
+    },
+    getByRecordId: async (recordId: string) => {
+        return await prisma.apiCall.findFirst({ where: { id: recordId } });
+    },
     create: async (apiCall: Prisma.ApiCallCreateInput) => {
         const result = await prisma.apiCall.create({ data: apiCall });
         await notifyTableChanged('ApiCall', result.id);

@@ -2,6 +2,12 @@ import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
 export const UserSettingsController = {
+    scanTable: async () => {
+        return await prisma.userSettings.findMany();
+    },
+    getByRecordId: async (recordId: string) => {
+        return await prisma.userSettings.findFirst({ where: { id: recordId } });
+    },
     get: async () => {
         const existing = await prisma.userSettings.findUnique({ where: { id: 'default' } });
         if (existing) return existing;

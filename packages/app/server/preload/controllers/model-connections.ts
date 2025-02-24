@@ -2,6 +2,12 @@ import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
 export const ModelConnectionController = {
+    scanTable: async () => {
+        return await prisma.modelConnections.findMany();
+    },
+    getByRecordId: async (recordId: string) => {
+        return await prisma.modelConnections.findFirst({ where: { id: recordId } });
+    },
     create: async (Connection: Prisma.ModelConnectionsCreateInput) => {
         const result = await prisma.modelConnections.create({ data: Connection });
         await notifyTableChanged('ModelConnections', result.id);

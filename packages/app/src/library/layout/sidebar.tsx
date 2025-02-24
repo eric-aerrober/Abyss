@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Box, ChevronLeft, ChevronRight, MessageSquare, type LucideIcon } from 'lucide-react';
+import { Box, ChevronLeft, ChevronRight, DatabaseIcon, MessageSquare, type LucideIcon } from 'lucide-react';
 import { useDatabaseQuery, useDatabaseRecordSubscription, useDatabaseTableSubscription } from '../../state/database-connection';
 import { Database } from '../../main';
 
@@ -19,7 +19,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url, open 
     return (
         <Link
             to={url}
-            className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] ${
+            className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] mb-1 ${
                 isActive
                     ? 'bg-primary-900/50 text-primary-300 border-r-2 border-primary-300'
                     : 'text-text-300 hover:bg-primary-950 hover:text-text-200'
@@ -44,12 +44,12 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({ title, open }) => {
 };
 
 export function Sidebar() {
-    const userSettings = useDatabaseTableSubscription('UserSettings', async database => database.table.UserSettings.get());
+    const userSettings = useDatabaseTableSubscription('UserSettings', async database => database.table.userSettings.get());
 
     const toggleSidebar = () => {
         if (!userSettings.data) return;
         userSettings.data.sidebarOpen = !userSettings.data.sidebarOpen;
-        Database.table.UserSettings.update(userSettings.data);
+        Database.table.userSettings.update(userSettings.data);
     };
 
     const isSidebarOpen = userSettings.data?.sidebarOpen || false;
@@ -65,6 +65,7 @@ export function Sidebar() {
 
             <SidebarSection title="Configuration" open={isSidebarOpen} />
             <SidebarItem title="Models" icon={Box} url="/model-connection" open={isSidebarOpen} />
+            <SidebarItem title="Storage" icon={DatabaseIcon} url="/database" open={isSidebarOpen} />
 
             <div
                 className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center bg-primary-950 rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-900 w-full

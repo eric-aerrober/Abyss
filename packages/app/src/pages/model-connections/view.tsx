@@ -14,12 +14,12 @@ export function ModelProfileViewPage() {
 
     const modelProfile = useDatabaseTableSubscription('ModelProfiles', async database => {
         if (!id) return null;
-        return database.table.ModelConnections.findUnique(id);
+        return database.table.modelConnections.findUnique(id);
     });
 
     const handleDelete = async () => {
         if (!id) return;
-        await Database.table.ModelConnections.delete(id);
+        await Database.table.modelConnections.delete(id);
         navigate('/model-connection');
     };
 

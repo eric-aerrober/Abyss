@@ -25,7 +25,7 @@ export function ModelProfileCreatePage() {
     const navigate = useNavigate();
 
     const handleCreateConnection = () => {
-        Database.table.ModelConnections.create({
+        Database.table.modelConnections.create({
             name: name,
             provider: selectedProvider,
             modelId: selectedModel,

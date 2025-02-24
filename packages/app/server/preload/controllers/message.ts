@@ -2,6 +2,12 @@ import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
 export const MessageController = {
+    scanTable: async () => {
+        return await prisma.message.findMany();
+    },
+    getByRecordId: async (recordId: string) => {
+        return await prisma.message.findFirst({ where: { id: recordId } });
+    },
     create: async (message: Prisma.MessageCreateInput) => {
         const result = await prisma.message.create({ data: message });
         await notifyTableChanged('Message', result.id);

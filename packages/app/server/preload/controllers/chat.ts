@@ -2,6 +2,12 @@ import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
 export const ChatController = {
+    scanTable: async () => {
+        return await prisma.chat.findMany();
+    },
+    getByRecordId: async (recordId: string) => {
+        return await prisma.chat.findFirst({ where: { id: recordId } });
+    },
     create: async (chat: Prisma.ChatCreateInput) => {
         const result = await prisma.chat.create({ data: chat });
         await notifyTableChanged('Chat', result.id);
@@ -23,9 +29,6 @@ export const ChatController = {
     },
     findUnique: async (id: string) => {
         return await prisma.chat.findUnique({ where: { id } });
-    },
-    findMany: async (where?: Prisma.ChatWhereInput) => {
-        return await prisma.chat.findMany({ where });
     },
     createWithThread: async (chat: Omit<Prisma.ChatCreateInput, 'threadId'>) => {
         const thread = await prisma.messageThread.create({

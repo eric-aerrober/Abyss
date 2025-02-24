@@ -13,7 +13,7 @@ export const LabelValue: React.FC<LabelValueProps> = ({ data, className = '' }) 
                     <div className="font-sm text-text-400 min-w-[100px] bg-primary-900/20 p-2 border-r border-primary-900 border-b ">
                         {key}
                     </div>
-                    <div className="text-text-300">{typeof value === 'object' ? JSON.stringify(value) : String(value)}</div>
+                    <div className="text-text-300">{value}</div>
                 </React.Fragment>
             ))}
         </div>

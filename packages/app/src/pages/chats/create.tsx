@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../library/input/button';
 
 export function ChatCreatePage() {
-    const allModels = useDatabaseTableSubscription('ModelConnections', async database => database.table.ModelConnections.findMany());
+    const allModels = useDatabaseTableSubscription('ModelConnections', async database => database.table.modelConnections.findMany());
     const [selectedModel, setSelectedModel] = useState<string>('');
     const [message, setMessage] = useState<string>('');
 
@@ -21,7 +21,7 @@ export function ChatCreatePage() {
 
     const handleSubmit = async () => {
         if (selectedModel && message) {
-            const thread = await Database.table.Chat.createWithThread({
+            const thread = await Database.table.chat.createWithThread({
                 name: 'New Chat',
                 partyA: selectedModel,
                 partyB: 'USER',

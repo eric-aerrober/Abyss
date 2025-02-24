@@ -102,6 +102,15 @@ export function notifyTableChanged(table: string, recordId?: string) {
     }
 }
 
+const tableControllers = {
+    modelConnections: ModelConnectionController,
+    userSettings: UserSettingsController,
+    messageThread: MessageThreadController,
+    message: MessageController,
+    apiCall: ApiCallController,
+    chat: ChatController,
+};
+
 const PrismaAPI = {
     // Subscriber to table changes
     subscribeTable: (table: string, handler: (data: any) => void) => {
@@ -117,15 +126,24 @@ const PrismaAPI = {
         return removeRecordSubscriber(table, recordId, subscriberId);
     },
 
-    // Access to database tables
-    table: {
-        ModelConnections: ModelConnectionController,
-        UserSettings: UserSettingsController,
-        MessageThread: MessageThreadController,
-        Message: MessageController,
-        ApiCall: ApiCallController,
-        Chat: ChatController,
+    describeTables: async () => {
+        const tableKeys = Object.keys(tableControllers);
+        const tableStats: { name: string; recordCount: number }[] = [];
+
+        for (const tableName of tableKeys) {
+            const table = prisma[tableName];
+            const count = await table.count();
+
+            tableStats.push({
+                name: tableName,
+                recordCount: count,
+            });
+        }
+        return tableStats;
     },
+
+    // Access to database tables
+    table: tableControllers,
 };
 
 contextBridge.exposeInMainWorld('prisma', PrismaAPI);

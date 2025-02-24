@@ -2,6 +2,12 @@ import { Prisma } from '@prisma/client';
 import { notifyTableChanged, prisma } from '../database-connection';
 
 export const MessageThreadController = {
+    scanTable: async () => {
+        return await prisma.messageThread.findMany();
+    },
+    getByRecordId: async (recordId: string) => {
+        return await prisma.messageThread.findFirst({ where: { id: recordId } });
+    },
     create: async (thread: Prisma.MessageThreadCreateInput) => {
         const result = await prisma.messageThread.create({ data: thread });
         await notifyTableChanged('MessageThread', result.id);
@@ -18,9 +24,6 @@ export const MessageThreadController = {
     },
     findUnique: async (id: string) => {
         return await prisma.messageThread.findUnique({ where: { id } });
-    },
-    findMany: async (where?: Prisma.MessageThreadWhereInput) => {
-        return await prisma.messageThread.findMany({ where });
     },
     addMessage: async (threadId: string, message: Omit<Prisma.MessageCreateInput, 'threadId'>) => {
         const result = await prisma.message.create({

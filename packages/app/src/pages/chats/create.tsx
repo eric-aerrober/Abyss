@@ -15,9 +15,10 @@ export function ChatCreatePage() {
     }, [allModels.data]);
 
     return (
-        <div>
+        <div className="flex flex-col gap-2">
             <div className="text-xl font-bold">Start new chat</div>
             <Select
+                label="Choose what to chat with"
                 value={selectedModel}
                 onChange={setSelectedModel}
                 options={allModels.data?.map(model => ({ value: model.id, label: model.name })) || []}
@@ -25,9 +26,10 @@ export function ChatCreatePage() {
             />
             <textarea
                 rows={6}
-                className="w-full bg-primary-900/20 text-text-200 border border-primary-950 rounded px-2 py-1 text-sm focus:outline-none focus:border-primary-700"
+                className="mt-4 w-full bg-primary-900/20 text-text-200 border border-primary-950 rounded px-2 py-1 text-sm focus:outline-none focus:border-primary-700"
                 value={message}
                 onChange={e => setMessage(e.target.value)}
+                placeholder="Enter your message here"
             />
         </div>
     );

@@ -21,7 +21,7 @@ export const Input = ({ value, onChange, label, placeholder, type = 'text', opti
                 value={value}
                 onChange={e => onChange(e.target.value)}
                 placeholder={placeholder}
-                className="w-full p-2 border border-text-700 rounded-md bg-transparent text-text-200"
+                className="w-full p-2 border border-background-light rounded-md text-text-200 bg-background-dark"
             />
             {options && (
                 <div className="flex gap-2 mt-2">
@@ -31,8 +31,8 @@ export const Input = ({ value, onChange, label, placeholder, type = 'text', opti
                             onClick={() => onChange(option.id)}
                             className={`px-3 py-1 text-sm rounded-md transition-colors ${
                                 value === option.id
-                                    ? 'border border-primary-300 text-text-200'
-                                    : 'border border-text-700 text-text-500 hover:text-text-200'
+                                    ? 'border border-background-light bg-background-dark'
+                                    : 'border border-background-light hover:bg-background-dark'
                             }`}
                         >
                             {option.name}

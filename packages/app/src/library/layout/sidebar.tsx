@@ -19,7 +19,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url, open 
     return (
         <Link
             to={url}
-            className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] mb-1 ${
+            className={`flex items-center gap-3 px-2 py-1 transition-colors text-xs mb-1 ${
                 isActive
                     ? 'bg-primary-base border-r-2 border-text-base'
                     : 'text-text-300 opacity-70 hover:opacity-100 hover:bg-primary-950 hover:text-text-200'

@@ -28,8 +28,8 @@ const SidebarItem: React.FC<SidebarItemData> = ({ title, icon: Icon, url }) => {
     return (
         <Link
             to={url}
-            className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] ${
-                isActive ? 'bg-primary-900/20 text-primary-300 bg-background-light' : 'opacity-50 hover:opacity-100 hover:text-text-base'
+            className={`flex items-center gap-3 px-2 py-1 transition-colors text-xs  ${
+                isActive ? 'bg-primary-base border-text-base border-r-2' : 'opacity-50 hover:opacity-100 hover:text-text-base'
             }`}
         >
             <Icon size={16} />
@@ -53,7 +53,7 @@ export function PageSidebar({ items, children, header }: PageSidebarProps) {
                     </div>
                 )}
             </div>
-            <div className="w-full h-full mb-[60px]">{children}</div>
+            <div className="w-full h-full mb-[60px] overflow-y-auto">{children}</div>
         </div>
     );
 }

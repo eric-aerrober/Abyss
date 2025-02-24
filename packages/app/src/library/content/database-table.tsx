@@ -9,7 +9,7 @@ interface DatabaseTableProps {
 export function TableKeyValue({ table, column, value }: { table: string; column: string; value: string }) {
     if (column === 'threadId') {
         return (
-            <Link to={`/database/id/messageThread/record/${value}`} className="text-text-base underline hover:text-text-light">
+            <Link to={`/database/id/messageThread/record/${value}`} className="text-text-base underline hover:text-primary-base">
                 {value}
             </Link>
         );
@@ -17,7 +17,7 @@ export function TableKeyValue({ table, column, value }: { table: string; column:
 
     if (column === 'id') {
         return (
-            <Link to={`/database/id/${table}/record/${value}`} className="text-text-base underline hover:text-text-light">
+            <Link to={`/database/id/${table}/record/${value}`} className="text-text-base underline hover:text-primary-base">
                 {value}
             </Link>
         );
@@ -58,11 +58,7 @@ export function DatabaseTable({ table, records }: DatabaseTableProps) {
                 </thead>
                 <tbody>
                     {records.map((record, rowIndex) => (
-                        <tr
-                            key={rowIndex}
-                            className="hover:bg-background-light cursor-pointer truncate"
-                            onClick={() => navigate(`/database/id/${table}/record/${record.id}`)}
-                        >
+                        <tr key={rowIndex} className="truncate">
                             {columns.map((column, colIndex) => (
                                 <td key={column} className="p-1.5 text-text-300 max-w-[100px] truncate">
                                     <TableKeyValue table={table} column={column} value={record[column]} />

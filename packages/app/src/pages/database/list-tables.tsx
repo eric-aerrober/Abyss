@@ -32,7 +32,7 @@ export function ListTablesPage() {
                 {sorted.map(table => (
                     <div
                         key={table.name}
-                        className="text-text-base hover:text-text-light cursor-pointer flex flex-row gap-3 items-center justify-between max-w-md capitalize"
+                        className="text-text-base hover:text-primary-base cursor-pointer flex flex-row gap-3 items-center justify-between max-w-md capitalize"
                         onClick={() => navigate(`/database/id/${table.name}`)}
                     >
                         {table.name}

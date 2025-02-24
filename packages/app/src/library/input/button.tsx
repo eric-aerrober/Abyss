@@ -14,7 +14,7 @@ export const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, onClick, cla
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`p-1 px-3 border border-primary-light rounded-sm transition-colors flex gap-3 items-center ${
+            className={`p-1 px-3 border border-primary-light rounded transition-colors flex gap-3 items-center bg-background-dark ${
                 disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-base hover:text-text-light'
             } ${className}`}
         >
@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({ onClick, className = '', childre
         <button
             onClick={onClick}
             disabled={disabled}
-            className={` text-sm px-3 py-1 border border-primary-light rounded transition-colors ${
+            className={` text-sm px-3 py-1 border border-primary-light rounded transition-colors bg-background-dark ${
                 disabled
                     ? 'opacity-50 cursor-not-allowed'
                     : selected
@@ -62,7 +62,7 @@ export const DestructiveButton: React.FC<DestructiveButtonProps> = ({ onClick, c
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`w-fit px-3 py-1 text-sm text-white bg-red-500 bg-opacity-20 border border-red-900 rounded-sm transition-colors ${
+            className={`w-fit px-3 py-1 text-sm text-white bg-red-500 bg-opacity-20 border border-red-900 rounded-sm transition-colors bg-background-dark ${
                 disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-600 hover:border-red-600'
             } ${className}`}
         >

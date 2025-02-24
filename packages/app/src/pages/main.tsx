@@ -9,8 +9,8 @@ export function MainPage() {
     return (
         <>
             <PageCenter>
-                <img src="/logo.png" alt="logo" className="w-[100px] opacity-50" />
-                <div className="text-3xl font-bold text-[#3d5788] rubik-glitch-regular">Abyss</div>
+                <img src="/logo.png" alt="logo" className="w-[100px]" />
+                <div className="text-3xl font-bold text-primary-base rubik-glitch-regular">Abyss</div>
                 <div className="grid grid-cols-2 gap-5 mt-12 w-[400px]">
                     <IconButton className="w-full" icon={Box} label="Models" onClick={() => navigate('/model-connection')} />
                     <IconButton className="w-full" icon={MessageSquare} label="Chats" onClick={() => navigate('/chats')} />

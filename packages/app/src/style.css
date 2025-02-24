@@ -18,7 +18,17 @@
     }
 
     html[data-theme='etherial'] {
-        --color-background-base: 20, 255, 42;
+        --color-background-light: #b9b9b9;
+        --color-background-base: #eeeff4;
+        --color-background-dark: #ffffff;
+
+        --color-primary-light: #ffaaaa;
+        --color-primary-base: #e95a5a;
+        --color-primary-dark: #7f1c1c;
+
+        --color-text-light: rgb(48, 48, 48);
+        --color-text-base: rgb(25, 25, 25);
+        --color-text-dark: rgb(0, 0, 0);
     }
 }
 

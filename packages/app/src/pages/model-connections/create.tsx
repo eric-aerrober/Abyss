@@ -15,7 +15,7 @@ const Providers = [
     },
 ];
 
-export const ModelProfileCreatePage = () => {
+export function ModelProfileCreatePage() {
     // Building a new profile
     const [selectedProvider, setSelectedProvider] = useState<string>('');
     const [selectedModel, setSelectedModel] = useState<string>('');
@@ -85,4 +85,4 @@ export const ModelProfileCreatePage = () => {
             </IconSection>
         </PageCrumbed>
     );
-};
+}

@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Box, type LucideIcon } from 'lucide-react';
+import { Box, ChevronLeft, ChevronRight, MessageSquare, type LucideIcon } from 'lucide-react';
+import { useDatabaseQuery, useDatabaseRecordSubscription, useDatabaseTableSubscription } from '../../state/database-connection';
+import { Database } from '../../main';
 
 interface SidebarItemProps {
     title: string;
     icon: LucideIcon;
     url: string;
+    open: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url, open }) => {
     const location = useLocation();
     const isActive = location.pathname.startsWith(url);
 
@@ -18,27 +21,60 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url }) => 
             to={url}
             className={`flex items-center gap-3 px-2 py-1 rounded-sm transition-colors text-xs translate-x-[1px] ${
                 isActive
-                    ? 'bg-primary-900/20 text-primary-300 border-r-2 border-primary-300'
-                    : 'text-text-400 hover:bg-primary-950 hover:text-text-300'
+                    ? 'bg-primary-900/50 text-primary-300 border-r-2 border-primary-300'
+                    : 'text-text-300 hover:bg-primary-950 hover:text-text-200'
             }`}
         >
-            <Icon size={16} />
-            <span>{title}</span>
+            <Icon size={open ? 16 : 18} />
+            {open && <span>{title}</span>}
         </Link>
+    );
+};
+interface SidebarSectionProps {
+    title: string;
+    open: boolean;
+}
+
+const SidebarSection: React.FC<SidebarSectionProps> = ({ title, open }) => {
+    return (
+        <div className={`flex flex-col gap-1 ${open ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="text-text-500 text-xs rounded-sm py-1 mt-5 mb-1 px-2 ">{title}</div>
+        </div>
     );
 };
 
 export function Sidebar() {
-    const navigate = useNavigate();
+    const userSettings = useDatabaseTableSubscription('UserSettings', async database => database.table.UserSettings.get());
+
+    const toggleSidebar = () => {
+        if (!userSettings.data) return;
+        userSettings.data.sidebarOpen = !userSettings.data.sidebarOpen;
+        Database.table.UserSettings.update(userSettings.data);
+    };
+
+    const isSidebarOpen = userSettings.data?.sidebarOpen || false;
 
     return (
-        <div className="fixed left-0 top-0 w-[150px] h-screen bg-primary-950 border-r border-primary-900 flex flex-col bg-opacity-20 pt-10">
-            <SidebarItem title="Models" icon={Box} url="/model-connection" />
+        <div
+            className={`relative left-0 top-0 h-screen bg-primary-900/20  border-r border-primary-900 flex flex-col pt-10 ${
+                isSidebarOpen ? 'min-w-[150px]' : 'w-[35px]'
+            }`}
+        >
+            <SidebarSection title="Activity" open={isSidebarOpen} />
+            <SidebarItem title="Chats" icon={MessageSquare} url="/chats" open={isSidebarOpen} />
+
+            <SidebarSection title="Configuration" open={isSidebarOpen} />
+            <SidebarItem title="Models" icon={Box} url="/model-connection" open={isSidebarOpen} />
+
             <div
-                className="flex flex-row gap-4 items-center justify-center bg-primary-950 rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-900 fixed bottom-0 w-[150px]"
-                onClick={() => navigate('/')}
+                className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center bg-primary-950 rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-900 w-full
+                }`}
+                onClick={e => {
+                    e.stopPropagation();
+                    toggleSidebar();
+                }}
             >
-                <img src="/logo.png" alt="Logo" className="w-8 h-8 cursor-pointer" onClick={() => navigate('/')} />
+                <ChevronLeft size={isSidebarOpen ? 16 : 18} className={`left-0 ${!isSidebarOpen ? 'rotate-180' : ''}`} />
             </div>
         </div>
     );

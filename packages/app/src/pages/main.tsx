@@ -4,7 +4,7 @@ import { IconButton } from '../library/input/button';
 import { Box } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export const MainPage = () => {
+export function MainPage() {
     const navigate = useNavigate();
     return (
         <>
@@ -17,4 +17,4 @@ export const MainPage = () => {
             </PageCenter>
         </>
     );
-};
+}

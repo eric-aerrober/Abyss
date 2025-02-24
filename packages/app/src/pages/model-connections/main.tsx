@@ -20,7 +20,7 @@ function ModelProfileCard({ model }: { model: ModelConnections }) {
     );
 }
 
-export const ModelProfileMainPage = () => {
+export function ModelProfileMainPage() {
     // Subscribe to the model profiles table and get the data whenever it changes
     const ModelProfiles = useDatabaseTableSubscription('ModelConnections', async database => database.table.ModelConnections.findMany());
 
@@ -47,4 +47,4 @@ export const ModelProfileMainPage = () => {
             </IconSection>
         </PageCrumbed>
     );
-};
+}

@@ -8,7 +8,7 @@ import { Database } from '../../main';
 import { useDatabaseTableSubscription } from '../../state/database-connection';
 import { LabelValue } from '../../library/layout/label-value';
 
-export const ModelProfileViewPage = () => {
+export function ModelProfileViewPage() {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -58,4 +58,4 @@ export const ModelProfileViewPage = () => {
             </IconSection>
         </PageCrumbed>
     );
-};
+}

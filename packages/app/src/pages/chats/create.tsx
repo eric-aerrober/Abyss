@@ -2,17 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { PageCenter } from '../../library/layout/page-center';
 import { useDatabaseQuery, useDatabaseTableSubscription } from '../../state/database-connection';
 import { Select } from '../../library/input/select';
+import { Database } from '../../main';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../library/input/button';
 
 export function ChatCreatePage() {
     const allModels = useDatabaseTableSubscription('ModelConnections', async database => database.table.ModelConnections.findMany());
     const [selectedModel, setSelectedModel] = useState<string>('');
     const [message, setMessage] = useState<string>('');
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (allModels.data) {
             setSelectedModel(allModels.data[0].id);
         }
     }, [allModels.data]);
+
+    const handleSubmit = async () => {
+        if (selectedModel && message) {
+            const thread = await Database.table.Chat.createWithThread({
+                name: 'New Chat',
+                partyA: selectedModel,
+                partyB: 'USER',
+            });
+            navigate(`/chats/id/${thread.threadId}`);
+        }
+    };
 
     return (
         <div className="flex flex-col gap-2">
@@ -31,6 +47,7 @@ export function ChatCreatePage() {
                 onChange={e => setMessage(e.target.value)}
                 placeholder="Enter your message here"
             />
+            <Button onClick={handleSubmit}>Start Chat</Button>
         </div>
     );
 }

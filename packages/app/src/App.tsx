@@ -8,6 +8,7 @@ import { ModelProfileCreatePage } from './pages/model-connections/create';
 import { ModelProfileViewPage } from './pages/model-connections/view';
 import { ChatMainPage } from './pages/chats/main';
 import { ChatCreatePage } from './pages/chats/create';
+import { ChatViewPage } from './pages/chats/view';
 
 export function App() {
     return (
@@ -22,6 +23,7 @@ export function App() {
                     <Route path="/model-connection/id/:id" element={<ModelProfileViewPage />} />
                     <Route path="/chats" element={<ChatMainPage />}>
                         <Route path="/chats/create" element={<ChatCreatePage />} />
+                        <Route path="/chats/id/:id" element={<ChatViewPage />} />
                     </Route>
                     <Route path="*" element={<MainPage />} />
                 </Routes>

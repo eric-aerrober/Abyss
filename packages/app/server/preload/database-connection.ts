@@ -4,6 +4,10 @@ import { createRequire } from 'module';
 import { v4 as uuidv4 } from 'uuid';
 import { ModelConnectionController } from './controllers/model-connections';
 import { UserSettingsController } from './controllers/user-settings';
+import { MessageThreadController } from './controllers/message-thread';
+import { MessageController } from './controllers/message';
+import { ApiCallController } from './controllers/api-call';
+import { ChatController } from './controllers/chat';
 
 // Setup prisma to support sqlite
 const require = createRequire(import.meta.url);
@@ -117,6 +121,10 @@ const PrismaAPI = {
     table: {
         ModelConnections: ModelConnectionController,
         UserSettings: UserSettingsController,
+        MessageThread: MessageThreadController,
+        Message: MessageController,
+        ApiCall: ApiCallController,
+        Chat: ChatController,
     },
 };
 

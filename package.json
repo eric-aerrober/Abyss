@@ -3,7 +3,8 @@
     "private": true,
     "workspaces": [
         "packages/app",
-        "packages/shared"
+        "packages/shared",
+        "packages/intelegence"
     ],
     "scripts": {
         "dev": "npm run dev --workspace=packages/app",

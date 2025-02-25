@@ -4,6 +4,8 @@
 
 @layer base {
     html[data-theme='abyss'] {
+        --color-header: #1f2862;
+
         --color-background-light: #1f2862;
         --color-background-base: #03061b;
         --color-background-dark: #00030f;
@@ -18,6 +20,8 @@
     }
 
     html[data-theme='etherial'] {
+        --color-header: #ffffff;
+
         --color-background-light: #b9b9b9;
         --color-background-base: #eeeff4;
         --color-background-dark: #ffffff;

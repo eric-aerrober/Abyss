@@ -1,0 +1,66 @@
+import { LanguageModel } from '@abyss/intelegence/src/interfaces/language';
+import { ChatController } from '../controllers/chat';
+import { MessageController } from '../controllers/message';
+import { MessageThreadController } from '../controllers/message-thread';
+import { Intelegence, OpenAIChatBasedLLM } from '@abyss/intelegence';
+import { buildChatContext, buildIntelegenceForChat } from './utils';
+import { ModelConnectionController } from '../controllers/model-connections';
+import { ApiCallController } from '../controllers/api-call';
+
+export async function AskAiToRespondToChat(chatId: string) {
+    const chat = await ChatController.getByRecordId(chatId);
+    if (!chat) {
+        throw new Error('Chat unknown');
+    }
+
+    const thread = await MessageThreadController.getByRecordId(chat?.threadId);
+    if (!thread) {
+        throw new Error('Thread unknown');
+    }
+
+    const messages = await MessageController.forThread(thread.id);
+    if (!messages) {
+        throw new Error('Thread unknown');
+    }
+
+    const connection = await ModelConnectionController.getByRecordId(chat.ai);
+    if (!connection) {
+        throw new Error('Connection unknown');
+    }
+
+    // Lock the chat
+    await MessageThreadController.update(thread.id, {
+        status: 'responding',
+    });
+
+    // Get the AI
+    const ai = await buildIntelegenceForChat(chat, connection);
+    const context = buildChatContext(messages);
+    const response = await ai.respond({ context });
+
+    // Save the response into the database
+    const message = await MessageController.create({
+        threadId: thread.id,
+        role: 'AI',
+        source: connection.id,
+        content: response.response,
+    });
+
+    if (response.apiCall) {
+        const apiCallRecord = await ApiCallController.create({
+            endpoint: response.apiCall.endpoint,
+            method: response.apiCall.method,
+            status: response.apiCall.status,
+            body: response.apiCall.body,
+            response: response.apiCall?.response,
+        });
+        await MessageController.update(message.id, {
+            apiCallId: apiCallRecord.id,
+        });
+    }
+
+    // Update the chat to be unlocked
+    await MessageThreadController.update(thread.id, {
+        status: 'active',
+    });
+}

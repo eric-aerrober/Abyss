@@ -2,41 +2,13 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { LucideIcon } from 'lucide-react';
-import { Sidebar } from './sidebar';
-
-interface SidebarItemData {
-    title: string;
-    icon: LucideIcon;
-    url: string;
-}
-
-interface SidebarSectionData {
-    title: string;
-    items: SidebarItemData[];
-}
+import { Sidebar, SidebarItem, SidebarItemProps } from './sidebar';
 
 interface PageSidebarProps {
-    items: SidebarItemData[];
+    items: SidebarItemProps[];
     children: React.ReactNode;
     header?: React.ReactNode;
 }
-
-const SidebarItem: React.FC<SidebarItemData> = ({ title, icon: Icon, url }) => {
-    const location = useLocation();
-    const isActive = location.pathname.startsWith(url);
-
-    return (
-        <Link
-            to={url}
-            className={`flex items-center gap-3 px-2 py-1 transition-colors text-xs  ${
-                isActive ? 'bg-primary-base border-text-base border-r-2' : 'opacity-50 hover:opacity-100 hover:text-text-base'
-            }`}
-        >
-            <Icon size={16} />
-            <span>{title}</span>
-        </Link>
-    );
-};
 
 export function PageSidebar({ items, children, header }: PageSidebarProps) {
     return (
@@ -45,7 +17,7 @@ export function PageSidebar({ items, children, header }: PageSidebarProps) {
             <div className="left-0 top-0 w-[250px] h-screen border-r border-background-light flex flex-col gap-1 bg-background-dark">
                 {header}
                 {items.map((item, index) => (
-                    <SidebarItem key={index} {...item} />
+                    <SidebarItem key={index} {...item} open />
                 ))}
                 {items.length === 0 && (
                     <div className="flex flex-col gap-1">

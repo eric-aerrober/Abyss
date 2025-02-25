@@ -19,11 +19,11 @@ export function App() {
     // Apply app theming
     const userSettings = useDatabaseTableSubscription('UserSettings', db => db.table.userSettings.get());
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', userSettings.data?.theme || '');
+        document.documentElement.setAttribute('data-theme', userSettings.data?.theme || 'abyss');
     }, [userSettings.data?.theme]);
 
     return (
-        <div className={`${userSettings.data?.theme || ''} text-text-base`}>
+        <div className={`${userSettings.data?.theme || 'abyss'} text-text-base`}>
             <HeaderBar />
             <AbyssBackground />
             <BrowserRouter>

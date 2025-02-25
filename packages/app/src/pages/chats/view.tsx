@@ -1,20 +1,15 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PageCrumbed } from '../../library/layout/page-crumbed';
-import { IconSection } from '../../library/layout/icon-section';
-import { Box, Globe, Settings, Trash2 } from 'lucide-react';
-import { Button, DestructiveButton } from '../../library/input/button';
-import { Database } from '../../main';
-import { useDatabaseTableSubscription } from '../../state/database-connection';
-import { LabelValue } from '../../library/layout/label-value';
 import { useChatWithModel } from '../../state/hooks/useChat';
+import { ChatMessageSection } from '../../library/content/chat-section';
 
 export function ChatViewPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const chat = useChatWithModel(id || '');
 
-    if (chat.loading || !chat.chat) {
+    if (chat.loading || !chat.chat || !chat.messages) {
         return <div>Loading...</div>;
     }
 
@@ -28,7 +23,9 @@ export function ChatViewPage() {
             ]}
             hideSidebar
         >
-            123
+            {chat.messages.map(m => (
+                <ChatMessageSection message={m} key={m.id} />
+            ))}
         </PageCrumbed>
     );
 }

@@ -8,6 +8,7 @@ import { MessageThreadController } from './controllers/message-thread';
 import { MessageController } from './controllers/message';
 import { ApiCallController } from './controllers/api-call';
 import { ChatController } from './controllers/chat';
+import { AskAiToRespondToChat } from './workflows/ask-ai-respond-thread';
 
 // Setup prisma to support sqlite
 const require = createRequire(import.meta.url);
@@ -144,6 +145,10 @@ const PrismaAPI = {
 
     // Access to database tables
     table: tableControllers,
+
+    workflows: {
+        respondToChat: AskAiToRespondToChat,
+    },
 };
 
 contextBridge.exposeInMainWorld('prisma', PrismaAPI);

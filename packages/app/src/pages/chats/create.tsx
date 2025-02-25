@@ -15,7 +15,9 @@ export function ChatCreatePage() {
 
     useEffect(() => {
         if (allModels.data) {
-            setSelectedModel(allModels.data[0].id);
+            if (allModels.data.length) {
+                setSelectedModel(allModels.data[0].id);
+            }
         }
     }, [allModels.data]);
 
@@ -26,7 +28,7 @@ export function ChatCreatePage() {
                 partyA: selectedModel,
                 partyB: 'USER',
             });
-            const messageRecord = await Database.table.messageThread.addMessage(chatRecord.id, {
+            const messageRecord = await Database.table.messageThread.addMessage(chatRecord.threadId, {
                 role: 'USER',
                 source: 'USER',
                 content: message,
@@ -52,7 +54,9 @@ export function ChatCreatePage() {
                 onChange={e => setMessage(e.target.value)}
                 placeholder="Enter your message here"
             />
-            <Button onClick={handleSubmit}>Start Chat</Button>
+            <Button disabled={!selectedModel} onClick={handleSubmit}>
+                Start Chat
+            </Button>
         </div>
     );
 }

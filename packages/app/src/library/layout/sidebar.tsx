@@ -5,26 +5,25 @@ import { Box, ChevronLeft, ChevronRight, DatabaseIcon, MessageSquare, Settings, 
 import { useDatabaseQuery, useDatabaseRecordSubscription, useDatabaseTableSubscription } from '../../state/database-connection';
 import { Database } from '../../main';
 
-interface SidebarItemProps {
+export interface SidebarItemProps {
     title: string;
     icon: LucideIcon;
     url: string;
-    open: boolean;
+    open?: boolean;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url, open }) => {
+export const SidebarItem: React.FC<SidebarItemProps> = ({ title, icon: Icon, url, open }) => {
     const location = useLocation();
     const isActive = location.pathname.startsWith(url);
 
     return (
         <Link
             to={url}
-            className={`flex items-center gap-3 px-2 py-1 transition-colors text-xs mb-1 ${
-                isActive
-                    ? 'bg-primary-base border-r-2 border-text-base'
-                    : 'text-text-300 opacity-70 hover:opacity-100 hover:bg-primary-950 hover:text-text-200'
+            className={`relative flex items-center gap-2 px-2 py-1 transition-colors text-xs ${
+                isActive ? 'bg-primary-base' : 'text-text-300 opacity-70 hover:opacity-100 hover:bg-primary-950 hover:text-text-200'
             }`}
         >
+            {isActive && <div className="absolute bg-text-base w-[2px] h-full -right-[1px]"></div>}
             <Icon size={open ? 16 : 18} />
             {open && <span>{title}</span>}
         </Link>
@@ -69,7 +68,7 @@ export function Sidebar() {
             <SidebarItem title="Settings" icon={Settings} url="/settings" open={isSidebarOpen} />
 
             <div
-                className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-primary-light w-full
+                className={`absolute bottom-0 h-[35px] flex flex-row gap-4 items-center justify-center rounded-sm p-2 bg-opacity-20 cursor-pointer border-t border-background-light w-full
                 }`}
                 onClick={e => {
                     e.stopPropagation();

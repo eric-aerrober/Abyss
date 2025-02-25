@@ -28,7 +28,7 @@ export function ViewTableRecordPage() {
 
     return (
         <PageCrumbed
-            title={`Table: ${id} - Record: ${recordId}`}
+            title={`Record: ${recordId}`}
             breadcrumbs={[
                 { name: 'Home', url: '/' },
                 { name: 'Database', url: '/database' },

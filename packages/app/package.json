@@ -17,7 +17,9 @@
         "prisma:migrate": "prisma migrate dev"
     },
     "dependencies": {
+        "@abyss/intelegence": "file:../intelegence",
         "@prisma/client": "^6.4.1",
+        "date-fns": "^4.1.0",
         "electron-updater": "^6.3.9",
         "lucide-react": "^0.475.0",
         "react-dom": "^18.2.0",

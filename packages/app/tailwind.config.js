@@ -20,6 +20,7 @@ module.exports = {
                     base: 'var(--color-text-base)',
                     dark: 'var(--color-text-dark)',
                 },
+                header: 'var(--color-header)',
                 // primary: {
                 //     50: '#ecf4ff',
                 //     100: '#dceaff',

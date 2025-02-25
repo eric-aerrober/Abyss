@@ -10,7 +10,7 @@ generator client {
 // Represents a connection to a model
 model ModelConnections {
   // Profile for connecting to a model
-  id            String   @id @default(cuid())
+  id            String   @id @default(uuid())
   name          String
 
   // Who provides the model
@@ -35,14 +35,13 @@ model UserSettings {
 
 // A chat with someone
 model Chat {
-  id            String   @id @default(cuid())
+  id            String   @id @default(uuid())
 
   // Name of the chat
   name          String
   
-  // The two parties in the chat
-  partyA        String
-  partyB        String
+  // The AI in the chat
+  ai            String
 
   // Message threads in the chat
   threadId     String
@@ -54,7 +53,7 @@ model Chat {
 
 // The entry point to a message thread
 model MessageThread {
-  id            String   @id @default(cuid())
+  id            String   @id @default(uuid())
   status        String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -62,7 +61,7 @@ model MessageThread {
 
 // A message in a thread
 model Message {
-  id            String   @id @default(cuid())
+  id            String   @id @default(uuid())
   threadId      String
   
   // Role in the thread, like user or model
@@ -81,7 +80,7 @@ model Message {
 
 // A model call to an API captured
 model ApiCall {
-  id            String   @id @default(cuid())
+  id            String   @id @default(uuid())
 
   // Endpoint of the API call
   endpoint      String

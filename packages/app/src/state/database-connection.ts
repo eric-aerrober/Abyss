@@ -27,7 +27,7 @@ export function useDatabaseQuery<T>(callback: (database: PrismaAPI) => Promise<T
     return { data, loading, error, refetch: fetchData };
 }
 
-export function useDatabaseTableSubscription<T>(table: string, callback: (database: PrismaAPI) => Promise<T>) {
+export function useDatabaseTableSubscription<T>(table: string, callback: (database: PrismaAPI) => Promise<T>, listeners: any[] = []) {
     const query = useDatabaseQuery(callback);
 
     useEffect(() => {
@@ -36,6 +36,10 @@ export function useDatabaseTableSubscription<T>(table: string, callback: (databa
         });
         return () => Database.unsubscribeTable(table, subscriptionId);
     }, [table]);
+
+    useEffect(() => {
+        query.refetch();
+    }, listeners);
 
     return query;
 }

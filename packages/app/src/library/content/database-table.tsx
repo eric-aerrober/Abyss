@@ -23,6 +23,14 @@ export function TableKeyValue({ table, column, value }: { table: string; column:
         );
     }
 
+    if (column === 'assistantId') {
+        return (
+            <Link to={`/database/id/modelConnections/record/${value}`} className="text-text-base underline hover:text-primary-base">
+                {value}
+            </Link>
+        );
+    }
+
     if (value && !value.toString().includes('Object')) {
         return value.toString();
     }

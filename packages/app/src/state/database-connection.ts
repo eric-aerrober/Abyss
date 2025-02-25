@@ -11,7 +11,9 @@ export function useDatabaseQuery<T>(callback: (database: PrismaAPI) => Promise<T
         try {
             setLoading(true);
             const result = await callback(Database);
-            setData(result);
+            if (result) {
+                setData(result);
+            }
         } catch (error) {
             setError(error as Error);
         } finally {
@@ -35,7 +37,7 @@ export function useDatabaseTableSubscription<T>(table: string, callback: (databa
             query.refetch();
         });
         return () => Database.unsubscribeTable(table, subscriptionId);
-    }, [table]);
+    }, [table, callback]);
 
     useEffect(() => {
         query.refetch();

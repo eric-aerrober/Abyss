@@ -25,8 +25,7 @@ export function ChatCreatePage() {
         if (selectedModel && message) {
             const chatRecord = await Database.table.chat.createWithThread({
                 name: 'New Chat',
-                partyA: selectedModel,
-                partyB: 'USER',
+                assistantId: selectedModel,
             });
             const messageRecord = await Database.table.messageThread.addMessage(chatRecord.threadId, {
                 role: 'USER',

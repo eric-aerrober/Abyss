@@ -23,7 +23,7 @@ export async function AskAiToRespondToChat(chatId: string) {
         throw new Error('Thread unknown');
     }
 
-    const connection = await ModelConnectionController.getByRecordId(chat.ai);
+    const connection = await ModelConnectionController.getByRecordId(chat.assistantId);
     if (!connection) {
         throw new Error('Connection unknown');
     }
@@ -33,34 +33,46 @@ export async function AskAiToRespondToChat(chatId: string) {
         status: 'responding',
     });
 
-    // Get the AI
-    const ai = await buildIntelegenceForChat(chat, connection);
-    const context = buildChatContext(messages);
-    const response = await ai.respond({ context });
+    try {
+        // Get the AI
+        const ai = await buildIntelegenceForChat(chat, connection);
+        const context = buildChatContext(messages);
+        const response = await ai.respond({ context });
 
-    // Save the response into the database
-    const message = await MessageController.create({
-        threadId: thread.id,
-        role: 'AI',
-        source: connection.id,
-        content: response.response,
-    });
-
-    if (response.apiCall) {
-        const apiCallRecord = await ApiCallController.create({
-            endpoint: response.apiCall.endpoint,
-            method: response.apiCall.method,
-            status: response.apiCall.status,
-            body: response.apiCall.body,
-            response: response.apiCall?.response,
+        // Save the response into the database
+        const message = await MessageController.create({
+            threadId: thread.id,
+            role: 'AI',
+            source: connection.id,
+            content: response.response,
         });
-        await MessageController.update(message.id, {
-            apiCallId: apiCallRecord.id,
+
+        if (response.apiCall) {
+            const apiCallRecord = await ApiCallController.create({
+                endpoint: response.apiCall.endpoint,
+                method: response.apiCall.method,
+                status: response.apiCall.status,
+                body: response.apiCall.body,
+                response: response.apiCall?.response,
+            });
+            await MessageController.update(message.id, {
+                apiCallId: apiCallRecord.id,
+            });
+        }
+
+        // Update the chat to be unlocked
+        await MessageThreadController.update(thread.id, {
+            status: 'active',
+        });
+    } catch (error) {
+        const message = await MessageController.create({
+            threadId: thread.id,
+            role: 'INTERNAL',
+            source: 'SYSTEM',
+            content: `An error occurred while asking the AI to respond to the chat: ${error}`,
+        });
+        await MessageThreadController.update(thread.id, {
+            status: 'active',
         });
     }
-
-    // Update the chat to be unlocked
-    await MessageThreadController.update(thread.id, {
-        status: 'active',
-    });
 }

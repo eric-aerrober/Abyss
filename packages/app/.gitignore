@@ -1,4 +1,4 @@
 node_modules
 dist-electron
 dist
-prisma/dev.db
+prisma/dev.*

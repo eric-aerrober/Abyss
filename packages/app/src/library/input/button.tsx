@@ -7,16 +7,24 @@ interface IconButtonProps {
     className?: string;
     label?: string;
     disabled?: boolean;
+    borderless?: boolean;
 }
 
-export const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, onClick, className = '', label, disabled = false }) => {
+export const IconButton: React.FC<IconButtonProps> = ({
+    icon: Icon,
+    onClick,
+    className = '',
+    label,
+    disabled = false,
+    borderless = false,
+}) => {
     return (
         <button
             onClick={onClick}
             disabled={disabled}
             className={`p-1 px-3 border border-primary-light rounded transition-colors flex gap-3 items-center bg-background-dark ${
-                disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-base hover:text-text-light'
-            } ${className}`}
+                disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-base hover:text-primary-base'
+            } ${className} ${borderless ? 'border-none' : ''}`}
         >
             <Icon size={18} />
             {label && <div className="text-sm">{label}</div>}

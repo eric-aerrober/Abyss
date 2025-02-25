@@ -12,7 +12,7 @@ interface PageSidebarProps {
 
 export function PageSidebar({ items, children, header }: PageSidebarProps) {
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row overflow-hidden h-[100vh]">
             <Sidebar />
             <div className="left-0 top-0 w-[250px] h-screen border-r border-background-light flex flex-col gap-1 bg-background-dark">
                 {header}
@@ -25,7 +25,7 @@ export function PageSidebar({ items, children, header }: PageSidebarProps) {
                     </div>
                 )}
             </div>
-            <div className="w-full h-full mb-[60px] overflow-y-auto">{children}</div>
+            <div className="w-full h-full overflow-y-auto">{children}</div>
         </div>
     );
 }

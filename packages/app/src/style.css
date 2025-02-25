@@ -4,10 +4,10 @@
 
 @layer base {
     html[data-theme='abyss'] {
-        --color-header: #1f2862;
+        --color-header: #060f45;
 
-        --color-background-light: #1f2862;
-        --color-background-base: #03061b;
+        --color-background-light: #080e37;
+        --color-background-base: #010310;
         --color-background-dark: #00030f;
 
         --color-primary-light: #19215e;

@@ -11,7 +11,7 @@ interface IconSectionProps {
 
 export const IconSection = ({ children, title, subtitle, icon: Icon, action }: IconSectionProps) => {
     return (
-        <div className="flex flex-col mt-8">
+        <div className="flex flex-col mt-8 hover:bg-background-slightlyDark rounded-md p-4">
             <div className="flex items-center gap-2">
                 <div className="flex items-center gap-2 flex-1">
                     <Icon className="w-4 h-4 text-primary-base" />

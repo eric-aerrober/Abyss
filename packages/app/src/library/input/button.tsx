@@ -58,6 +58,27 @@ export const Button: React.FC<ButtonProps> = ({ onClick, className = '', childre
     );
 };
 
+interface GhostButtonProps {
+    onClick?: () => void;
+    className?: string;
+    children: React.ReactNode;
+    disabled?: boolean;
+}
+
+export const GhostButton: React.FC<GhostButtonProps> = ({ onClick, className = '', children, disabled = false }) => {
+    return (
+        <button
+            onClick={onClick}
+            disabled={disabled}
+            className={`text-sm px-3 py-1 border border-transparent rounded transition-colors bg-transparent ${
+                disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-light hover:text-primary-base'
+            } ${className}`}
+        >
+            {children}
+        </button>
+    );
+};
+
 interface DestructiveButtonProps {
     onClick?: () => void;
     className?: string;
@@ -75,6 +96,29 @@ export const DestructiveButton: React.FC<DestructiveButtonProps> = ({ onClick, c
             } ${className}`}
         >
             {children}
+        </button>
+    );
+};
+
+interface GhostIconButtonProps {
+    onClick?: () => void;
+    className?: string;
+    icon: LucideIcon;
+    label?: string;
+    disabled?: boolean;
+}
+
+export const GhostIconButton: React.FC<GhostIconButtonProps> = ({ onClick, className = '', icon: Icon, label, disabled = false }) => {
+    return (
+        <button
+            onClick={onClick}
+            disabled={disabled}
+            className={`flex items-center gap-2 text-sm px-3 py-1 border border-transparent rounded transition-colors bg-transparent ${
+                disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-light hover:text-primary-base'
+            } ${className}`}
+        >
+            <Icon className="w-4 h-4" />
+            {label && <span>{label}</span>}
         </button>
     );
 };

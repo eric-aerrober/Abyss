@@ -1,8 +1,8 @@
 import { ModelConnections } from '@prisma/client';
-import { Box, Download, Link, PaintBucket, Plus } from 'lucide-react';
+import { Box, Download, Link, PaintBucket, Plus, RefreshCcw } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, IconButton } from '../../library/input/button';
+import { Button, GhostButton, GhostIconButton, IconButton } from '../../library/input/button';
 import { IconSection } from '../../library/layout/icon-section';
 import { PageCrumbed } from '../../library/layout/page-crumbed';
 import { useDatabaseTableSubscription } from '../../state/database-connection';
@@ -55,7 +55,11 @@ export function SettingsPage() {
                 />
             </IconSection>
 
-            <IconSection icon={Download} title="App Updates">
+            <IconSection
+                icon={Download}
+                title="App Updates"
+                action={<GhostIconButton icon={RefreshCcw} onClick={() => updater.checkForUpdate()} />}
+            >
                 <div className="flex flex-col gap-2">
                     <a
                         href="https://github.com/eric-aerrober/Abyss/releases"
@@ -66,11 +70,8 @@ export function SettingsPage() {
                         Tracking updates from GitHub <Link className="inline-block" size={16} />
                     </a>
                     <div className="flex flex-row gap-2">
-                        <div className="text-sm text-text-base">{updateerMessage()}</div>
+                        <div className="text-text-base">{updateerMessage()}</div>
                     </div>
-                    <Button className="w-fit" onClick={() => updater.checkForUpdate()}>
-                        Check for updates
-                    </Button>
                 </div>
             </IconSection>
         </PageCrumbed>

@@ -21,5 +21,8 @@
         "husky": "^9.1.7",
         "icon-gen": "^3.0.1",
         "sharp": "^0.33.2"
+    },
+    "dependencies": {
+        "react-markdown": "^8.0.6"
     }
 }

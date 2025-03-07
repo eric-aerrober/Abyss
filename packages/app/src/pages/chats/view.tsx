@@ -11,7 +11,7 @@ export function ChatViewPage() {
     const { id } = useParams();
     const chat = useChatWithModel(id || '');
 
-    if (chat.loading || !chat.chat || !chat.messages || !chat.thread) {
+    if (chat.loading || !chat.chat || !chat.messages || !chat.thread || !chat.model) {
         return <div>Loading...</div>;
     }
 
@@ -25,12 +25,8 @@ export function ChatViewPage() {
 
     return (
         <PageCrumbed
-            title={`Chat with ${chat.chat.assistantId}`}
-            breadcrumbs={[
-                { name: 'Home', url: '/' },
-                { name: 'Chats', url: '/chats' },
-                { name: chat.chat.name, url: `/chats/id/${id}` },
-            ]}
+            title={`${chat.model.name}: ${chat.chat.name}`}
+            subtitle={chat.chat.description || undefined}
             hideSidebar
         >
             {chat.messages.map(m => (

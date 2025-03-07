@@ -3,7 +3,7 @@ import { notifyTableChanged, prisma } from '../database-connection';
 
 export const ChatController = {
     scanTable: async () => {
-        return await prisma.chat.findMany();
+        return await prisma.chat.findMany({ orderBy: { createdAt: 'desc' } });
     },
     getByRecordId: async (recordId: string) => {
         return await prisma.chat.findFirst({ where: { id: recordId } });

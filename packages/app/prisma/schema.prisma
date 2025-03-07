@@ -39,7 +39,8 @@ model Chat {
 
   // Name of the chat
   name          String
-  
+  description   String?
+
   // The AI in the chat
   assistantId   String
 

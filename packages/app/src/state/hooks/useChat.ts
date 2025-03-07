@@ -30,7 +30,14 @@ export function useChatWithModel(chatId: string) {
     };
     const messages = useDatabaseTableSubscription('Message', _getMessages, [thread.data?.id]);
 
-    if (chat.loading || thread.loading || messages.loading) {
+    // The model for the chat
+    const _getModel = async database => {
+        const model = await database.table.modelConnections.findUnique(chat.data?.assistantId || '');
+        return model;
+    };
+    const model = useDatabaseTableSubscription('ModelConnections', _getModel, [chat.data?.assistantId]);
+
+    if (chat.loading || thread.loading || messages.loading || model.loading) {
         return {
             loading: true,
         };
@@ -41,5 +48,6 @@ export function useChatWithModel(chatId: string) {
         chat: chat.data,
         thread: thread.data,
         messages: messages.data,
+        model: model.data,
     };
 }

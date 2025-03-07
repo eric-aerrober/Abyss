@@ -28,11 +28,14 @@ export function ChatCreatePage() {
                 name: 'New Chat',
                 assistantId: selectedModel,
             });
-            const messageRecord = await Database.table.messageThread.addMessage(chatRecord.threadId, {
+            await Database.table.messageThread.addMessage(chatRecord.threadId, {
                 role: 'USER',
                 source: 'USER',
                 content: message,
             });
+
+            Database.workflows.titleConversation(chatRecord.id);
+            Database.workflows.respondToChat(chatRecord.id);
             navigate(`/chats/id/${chatRecord.id}`);
         }
     };

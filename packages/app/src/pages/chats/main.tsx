@@ -11,8 +11,8 @@ export function ChatMainPage() {
 
     const createChatHeader = (
         <div className="flex flex-row items-center justify-between mt-5 border-b border-background-light">
-            <div className="text-sm rounded-sm py-1 mb-1 px-2">Chats</div>
-            <button className="hover:text-primary-base rounded-sm py-1 mb-1 px-2" onClick={() => navigate('/chats/create')}>
+            <div className="text-sm rounded-sm mt-2 mb-1 px-2">Chats</div>
+            <button className="hover:text-primary-base rounded-sm mt-1 mb-1 px-2" onClick={() => navigate('/chats/create')}>
                 <span className="text-xl">+</span>
             </button>
         </div>

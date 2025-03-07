@@ -1,6 +1,4 @@
-import { Intelegence, OpenAIChatBasedLLM } from '@abyss/intelegence';
-import { LanguageModel } from '@abyss/intelegence/src/interfaces/language';
-import { ChatContext } from '@abyss/intelegence/src/utils/chat-context';
+import { ChatContext, Intelegence, LanguageModel, OpenAIChatBasedLLM } from '@abyss/intelligence';
 import { Chat, Message, ModelConnections } from '@prisma/client';
 
 export function buildIntelegenceForChat(chat: Chat, aiConnection: ModelConnections) {

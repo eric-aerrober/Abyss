@@ -55,7 +55,7 @@ export function Sidebar() {
 
     return (
         <div
-            className={`relative left-0 top-0 h-screen bg-background-dark border-r border-background-light flex flex-col pt-10 ${
+            className={`relative left-0 top-0 h-screen bg-background-dark border-r border-background-light flex flex-col pt-5 ${
                 isSidebarOpen ? 'min-w-[150px]' : 'w-[35px]'
             }`}
         >

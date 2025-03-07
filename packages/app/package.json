@@ -17,7 +17,7 @@
         "prisma:migrate": "prisma migrate dev"
     },
     "dependencies": {
-        "@abyss/intelegence": "file:../intelegence",
+        "@abyss/intelligence": "file:../intelligence",
         "@prisma/client": "^6.4.1",
         "date-fns": "^4.1.0",
         "electron-updater": "^6.3.9",

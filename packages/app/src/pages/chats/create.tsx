@@ -5,6 +5,7 @@ import { Select } from '../../library/input/select';
 import { Database } from '../../main';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../library/input/button';
+import { PageCrumbed } from '../../library/layout/page-crumbed';
 
 export function ChatCreatePage() {
     const allModels = useDatabaseTableSubscription('ModelConnections', async database => database.table.modelConnections.findMany());
@@ -37,7 +38,15 @@ export function ChatCreatePage() {
     };
 
     return (
-        <div className="flex flex-col gap-2 p-5">
+        <PageCrumbed
+            title={`New Conversation`}
+            breadcrumbs={[
+                { name: 'Home', url: '/' },
+                { name: 'Chats', url: '/chats' },
+                { name: 'New Conversation', url: '/chats/create' },
+            ]}
+            hideSidebar
+        >
             <div className="text-xl font-bold">Start new chat</div>
             <Select
                 label="Choose what to chat with"
@@ -56,6 +65,6 @@ export function ChatCreatePage() {
             <Button disabled={!selectedModel} onClick={handleSubmit}>
                 Start Chat
             </Button>
-        </div>
+        </PageCrumbed>
     );
 }

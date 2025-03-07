@@ -1,39 +1,40 @@
-import { app, BrowserWindow, ipcMain, Menu } from "electron";
-import { autoUpdater } from "electron-updater";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { app, BrowserWindow, ipcMain, Menu } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-process.env.DIST_ELECTRON = join(__dirname, "../");
-process.env.DIST = join(process.env.DIST_ELECTRON, "../dist");
-process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
-    ? join(process.env.DIST_ELECTRON, "../public")
-    : process.env.DIST;
+process.env.DIST_ELECTRON = join(__dirname, '../');
+process.env.DIST = join(process.env.DIST_ELECTRON, '../dist');
+process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL ? join(process.env.DIST_ELECTRON, '../public') : process.env.DIST;
 
 // Create the main application window
 let mainWindow: BrowserWindow | null = null;
-const preload = join(__dirname, "../preload/index.mjs");
+const preload = join(__dirname, '../preload/index.mjs');
 const url = process.env.VITE_DEV_SERVER_URL;
-const indexHtml = join(process.env.DIST, "index.html");
+const indexHtml = join(process.env.DIST, 'index.html');
 
 async function createWindow() {
     mainWindow = new BrowserWindow({
-        title: "Abyss",
-        icon: join(process.env.VITE_PUBLIC!, "favicon.ico"),
+        title: 'Abyss',
+        icon: join(process.env.VITE_PUBLIC!, 'favicon.ico'),
         webPreferences: {
             preload,
             nodeIntegration: true,
-            webSecurity: false,
+            contextIsolation: true,
+            webSecurity: true,
         },
         width: 1200,
         height: 800,
         frame: false,
-        titleBarStyle: "customButtonsOnHover",
+        titleBarStyle: 'hidden',
     });
 
-    mainWindow.webContents.openDevTools();
+    if (process.env.VITE_DEV_SERVER_URL) {
+        mainWindow.webContents.openDevTools();
+    }
 
     if (url) {
         mainWindow.loadURL(url);
@@ -52,19 +53,19 @@ app.whenReady().then(() => {
     createWindow();
 });
 
-app.on("window-all-closed", () => {
+app.on('window-all-closed', () => {
     mainWindow = null;
     app.quit();
 });
 
-app.on("second-instance", () => {
+app.on('second-instance', () => {
     if (mainWindow) {
         if (mainWindow.isMinimized()) mainWindow.restore();
         mainWindow.focus();
     }
 });
 
-app.on("activate", () => {
+app.on('activate', () => {
     const allWindows = BrowserWindow.getAllWindows();
     if (allWindows.length) {
         allWindows[0].focus();
@@ -73,7 +74,7 @@ app.on("activate", () => {
     }
 });
 
-ipcMain.handle("open-win", (_, arg) => {
+ipcMain.handle('open-win', (_, arg) => {
     const childWindow = new BrowserWindow({
         webPreferences: {
             preload,
@@ -90,57 +91,57 @@ ipcMain.handle("open-win", (_, arg) => {
 });
 
 autoUpdater.setFeedURL({
-    provider: "github",
-    owner: "eric-aerrober",
-    repo: "Abyss",
+    provider: 'github',
+    owner: 'eric-aerrober',
+    repo: 'Abyss',
     private: false,
 });
 
 // Forward autoUpdater events to the renderer via IPC
-autoUpdater.on("update-available", (info) => {
-    console.log("Update available:", info);
+autoUpdater.on('update-available', info => {
+    console.log('Update available:', info);
     if (mainWindow) {
-        mainWindow.webContents.send("update-available", info);
+        mainWindow.webContents.send('update-available', info);
     }
 });
 
-autoUpdater.on("download-progress", (progress) => {
-    console.log("Download progress:", progress);
+autoUpdater.on('download-progress', progress => {
+    console.log('Download progress:', progress);
     if (mainWindow) {
-        mainWindow.webContents.send("download-progress", progress);
+        mainWindow.webContents.send('download-progress', progress);
     }
 });
 
-autoUpdater.on("update-downloaded", (info) => {
-    console.log("Update downloaded:", info);
+autoUpdater.on('update-downloaded', info => {
+    console.log('Update downloaded:', info);
     if (mainWindow) {
-        mainWindow.webContents.send("update-downloaded", info);
+        mainWindow.webContents.send('update-downloaded', info);
     }
 });
 
-autoUpdater.on("update-not-available", (info) => {
+autoUpdater.on('update-not-available', info => {
     if (mainWindow) {
-        mainWindow.webContents.send("update-not-available", info);
+        mainWindow.webContents.send('update-not-available', info);
     }
 });
 
-autoUpdater.on("error", (info) => {
+autoUpdater.on('error', info => {
     if (mainWindow) {
-        mainWindow.webContents.send("updator-error", info);
+        mainWindow.webContents.send('updator-error', info);
     }
 });
 
-autoUpdater.on("update-cancelled", (info) => {
+autoUpdater.on('update-cancelled', info => {
     if (mainWindow) {
-        mainWindow.webContents.send("updator-error", info);
+        mainWindow.webContents.send('updator-error', info);
     }
 });
 
-ipcMain.handle("check-for-updates", async () => {
+ipcMain.handle('check-for-updates', async () => {
     const data = await autoUpdater.checkForUpdates();
     return data?.updateInfo;
 });
 
-ipcMain.handle("restart-to-update", () => {
+ipcMain.handle('restart-to-update', () => {
     autoUpdater.quitAndInstall();
 });

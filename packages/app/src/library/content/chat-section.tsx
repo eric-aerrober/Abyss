@@ -25,7 +25,7 @@ export function ChatMessageSection({ message }: { message: Message }) {
                 <span className="font-medium text-text-dark mr-2">{isUserMessage ? 'You' : message.source}</span>
                 <span className="text-text-dark opacity-70">{formattedTime}</span>
             </div>
-            <div className="p-3 rounded border bg-background-dark border-background-light text-text-light text-xs font-mono">
+            <div className="p-3 rounded border border-transparent hover:border-background-light text-text-light text-xs font-mono">
                 <pre className="overflow-x-auto whitespace-pre-wrap">{message.content}</pre>
             </div>
             <div className="flex items-center justify-end text-xs my-1 gap-2">

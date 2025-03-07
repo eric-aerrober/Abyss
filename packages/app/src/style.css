@@ -6,10 +6,10 @@
     html[data-theme='abyss'] {
         --color-header: #060f45;
 
-        --color-background-light: #181d3f;
-        --color-background-base: #030720;
-        --color-background-slightly-dark: #010518;
-        --color-background-dark: #00030f;
+        --color-background-light: #3a3a3d;
+        --color-background-base: #131314;
+        --color-background-slightly-dark: #0f0f10;
+        --color-background-dark: #000000;
 
         --color-primary-light: #19215e;
         --color-primary-base: #0e57c3;

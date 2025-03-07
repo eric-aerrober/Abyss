@@ -34,8 +34,8 @@ export function ChatCreatePage() {
                 content: message,
             });
 
-            Database.workflows.titleConversation(chatRecord.id);
-            Database.workflows.respondToChat(chatRecord.id);
+            Database.workflows.askAiToTitleConversation(chatRecord.id);
+            Database.workflows.askAIToRespondToChat(chatRecord.id);
             navigate(`/chats/id/${chatRecord.id}`);
         }
     };

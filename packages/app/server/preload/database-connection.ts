@@ -150,8 +150,8 @@ const PrismaAPI = {
     table: tableControllers,
 
     workflows: {
-        respondToChat: AskAiToRespondToChat,
-        titleConversation: AskAiToTitleConversation,
+        askAIToRespondToChat: AskAiToRespondToChat,
+        askAiToTitleConversation: AskAiToTitleConversation,
     },
 };
 

@@ -31,6 +31,14 @@ export function TableKeyValue({ table, column, value }: { table: string; column:
         );
     }
 
+    if (column === 'apiCallId') {
+        return (
+            <Link to={`/database/id/apiCall/record/${value}`} className="text-text-base underline hover:text-primary-base">
+                {value}
+            </Link>
+        );
+    }
+
     if (value && !value.toString().includes('Object')) {
         return value.toString();
     }

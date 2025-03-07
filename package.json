@@ -8,8 +8,11 @@
     ],
     "scripts": {
         "dev": "npm run dev --workspace=packages/app",
-        "build:mac": "node scripts/generate-icons.js && npm run build:mac --workspace=packages/app",
-        "publish:mac": "node scripts/generate-icons.js && npm run publish:mac --workspace=packages/app",
+        "install": "npm install --workspaces",
+        "install:app": "npm install --workspace=packages/app",
+        "install:intelegence": "npm install --workspace=packages/intelegence",
+        "build:mac": "npm run install && node scripts/generate-icons.js && npm run build:mac --workspace=packages/app",
+        "publish:mac": "npm run install && node scripts/generate-icons.js && npm run publish:mac --workspace=packages/app",
         "generate-icons": "node scripts/generate-icons.js",
         "bump": "npm run bump --workspace=packages/app",
         "prepare": "husky"

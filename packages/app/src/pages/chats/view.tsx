@@ -5,11 +5,10 @@ import { useChatWithModel } from '../../state/hooks/useChat';
 import { ChatMessageSection } from '../../library/content/chat-section';
 import { Button } from '../../library/input/button';
 import { Database } from '../../main';
+import { BotIcon } from 'lucide-react';
 
 export function ChatViewPage() {
     const { id } = useParams();
-    const location = useLocation();
-    const navigate = useNavigate();
     const chat = useChatWithModel(id || '');
 
     if (chat.loading || !chat.chat || !chat.messages || !chat.thread) {
@@ -37,7 +36,14 @@ export function ChatViewPage() {
             {chat.messages.map(m => (
                 <ChatMessageSection message={m} key={m.id} />
             ))}
-            <Button onClick={onAskAiToRespond}>Ask AI to respond</Button>
+            {chat.thread.status === 'responding' && (
+                <div className="flex justify-center my-4">
+                    <div className="animate-bounce text-text-dark">
+                        <BotIcon />
+                    </div>
+                </div>
+            )}
+            {chat.thread.status !== 'responding' && <Button onClick={onAskAiToRespond}>Ask AI to respond</Button>}
         </PageCrumbed>
     );
 }

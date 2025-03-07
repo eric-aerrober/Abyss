@@ -25,6 +25,7 @@ if (typeof window !== 'undefined') {
 Database.table.userSettings.get().then(settings => {
     if (settings.lastPage) {
         window.history.pushState({}, '', settings.lastPage);
+        console.log('Loading up last page', settings.lastPage);
     }
 
     ReactDOM.createRoot(document.getElementById('root')!).render(

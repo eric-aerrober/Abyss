@@ -113,7 +113,7 @@ export const GhostIconButton: React.FC<GhostIconButtonProps> = ({ onClick, class
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`flex items-center gap-2 text-sm px-3 py-1 border border-transparent rounded transition-colors bg-transparent ${
+            className={`flex items-center gap-2 text-sm px-1 py-1 border border-transparent rounded transition-colors bg-transparent ${
                 disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary-light hover:text-primary-base'
             } ${className}`}
         >

@@ -9,6 +9,7 @@ import { MessageController } from './controllers/message';
 import { ApiCallController } from './controllers/api-call';
 import { ChatController } from './controllers/chat';
 import { AskAiToRespondToChat } from './workflows/ask-ai-respond-thread';
+import { RenderedThreadController } from './controllers/rendered-thread';
 
 // Setup prisma to support sqlite
 const require = createRequire(import.meta.url);
@@ -109,6 +110,7 @@ const tableControllers = {
     messageThread: MessageThreadController,
     message: MessageController,
     apiCall: ApiCallController,
+    renderedConversationThread: RenderedThreadController,
     chat: ChatController,
 };
 

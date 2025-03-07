@@ -2,7 +2,7 @@ import { ModelConnections } from '@prisma/client';
 import { Box, Plus } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconButton } from '../../library/input/button';
+import { GhostIconButton, IconButton } from '../../library/input/button';
 import { IconSection } from '../../library/layout/icon-section';
 import { PageCrumbed } from '../../library/layout/page-crumbed';
 import { useDatabaseTableSubscription } from '../../state/database-connection';
@@ -11,7 +11,7 @@ function ModelProfileCard({ model }: { model: ModelConnections }) {
     const navigate = useNavigate();
     return (
         <div
-            className="flex flex-row gap-3 mb-2 p-2 rounded-sm border border-background-light hover:border-primary-base transition-colors cursor-pointer items-center"
+            className="flex flex-row gap-3 mb-2 p-2 rounded border border-background-light hover:border-primary-base transition-colors cursor-pointer items-center"
             onClick={() => navigate(`/model-connection/id/${model.id}`)}
         >
             <div className=" capitalize">{model.name || 'Untitled'}</div>
@@ -28,7 +28,7 @@ export function ModelProfileMainPage() {
     const navigate = useNavigate();
 
     const createModelProfileElement = () => {
-        return <IconButton icon={Plus} onClick={() => navigate('/model-connection/create')} />;
+        return <GhostIconButton icon={Plus} onClick={() => navigate('/model-connection/create')} />;
     };
 
     return (

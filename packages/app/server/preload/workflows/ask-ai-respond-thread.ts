@@ -6,6 +6,7 @@ import { Intelegence, OpenAIChatBasedLLM } from '@abyss/intelligence';
 import { buildChatContext, buildIntelegenceForChat } from './utils';
 import { ModelConnectionController } from '../controllers/model-connections';
 import { ApiCallController } from '../controllers/api-call';
+import { RenderedThreadController } from '../controllers/rendered-thread';
 
 export async function AskAiToRespondToChat(chatId: string) {
     const chat = await ChatController.getByRecordId(chatId);
@@ -57,6 +58,15 @@ export async function AskAiToRespondToChat(chatId: string) {
             });
             await MessageController.update(message.id, {
                 apiCallId: apiCallRecord.id,
+            });
+        }
+
+        if (response.chat) {
+            const renderedThread = await RenderedThreadController.create({
+                messages: response.chat.getMessages() as any,
+            });
+            await MessageController.update(message.id, {
+                renderedId: renderedThread.id,
             });
         }
 

@@ -7,6 +7,8 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDatabaseQuery } from '../../state/database-connection';
 import { DatabaseTable, TableKeyValue } from '../../library/content/database-table';
 import { LabelValue } from '../../library/layout/label-value';
+import { CustomRendererForConversationThread } from './custom/rendered-conversation-thread';
+import { RenderedConversationThread } from '@prisma/client';
 
 export function ViewTableRecordPage() {
     const { id, recordId } = useParams();
@@ -26,6 +28,19 @@ export function ViewTableRecordPage() {
         }
     }
 
+    // Some custom renderers
+
+    let content = <LabelValue data={newDataObject} />;
+    if (id === 'renderedConversationThread') {
+        delete newDataObject['messages'];
+        content = (
+            <>
+                <LabelValue data={newDataObject} />
+                <CustomRendererForConversationThread thread={record.data as RenderedConversationThread} />
+            </>
+        );
+    }
+
     return (
         <PageCrumbed
             title={`Record: ${recordId}`}
@@ -38,7 +53,7 @@ export function ViewTableRecordPage() {
             fullWidth
         >
             {!record.data && <div>Loading...</div>}
-            {record.data && <LabelValue data={newDataObject} />}
+            {record.data && content}
         </PageCrumbed>
     );
 }

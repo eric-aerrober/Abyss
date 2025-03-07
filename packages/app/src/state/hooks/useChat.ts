@@ -1,3 +1,4 @@
+import { MessageThread } from '@prisma/client';
 import { useDatabaseTableSubscription } from '../database-connection';
 
 export function useChatWithModel(chatId: string) {
@@ -18,7 +19,7 @@ export function useChatWithModel(chatId: string) {
             return thread;
         }
     };
-    const thread = useDatabaseTableSubscription('MessageThread', _getThread, [chat.data?.threadId]);
+    const thread = useDatabaseTableSubscription<MessageThread>('MessageThread', _getThread, [chat.data?.threadId]);
 
     // The messages for the thread
     const _getMessages = async database => {

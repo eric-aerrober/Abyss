@@ -1,10 +1,11 @@
-import { Box, Table, TableIcon } from 'lucide-react';
+import { Box, Folder, GhostIcon, Table, TableIcon } from 'lucide-react';
 import React from 'react';
 import { IconSection } from '../../library/layout/icon-section';
 import { PageCrumbed } from '../../library/layout/page-crumbed';
 import { Database } from '../../main';
 import { useNavigate } from 'react-router-dom';
 import { useDatabaseQuery } from '../../state/database-connection';
+import { GhostIconButton } from '../../library/input/button';
 
 export function ListTablesPage() {
     const navigate = useNavigate();
@@ -28,6 +29,13 @@ export function ListTablesPage() {
                 title="Database Tables"
                 icon={Table}
                 subtitle="Abyss uses a local sqlite database to store all data. Explore the tables below."
+                action={
+                    <GhostIconButton
+                        icon={Folder}
+                        //@ts-ignore
+                        onClick={() => window.fs.openDbFolder()}
+                    />
+                }
             >
                 {sorted.map(table => (
                     <div

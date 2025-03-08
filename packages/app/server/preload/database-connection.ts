@@ -11,7 +11,6 @@ import { ChatController } from './controllers/chat';
 import { RenderedThreadController } from './controllers/rendered-thread';
 import { AskAiToRespondToChat } from './workflows/ask-ai-respond-thread';
 import { AskAiToTitleConversation } from './workflows/ask-ai-to-title-conversation';
-import { ActionDefinitionsController } from './controllers/action-definitions';
 
 // Setup prisma to support sqlite
 const require = createRequire(import.meta.url);
@@ -114,7 +113,6 @@ const tableControllers = {
     apiCall: ApiCallController,
     renderedConversationThread: RenderedThreadController,
     chat: ChatController,
-    actionDefinitions: ActionDefinitionsController,
 };
 
 const PrismaAPI = {
@@ -153,7 +151,7 @@ const PrismaAPI = {
 
     workflows: {
         askAIToRespondToChat: AskAiToRespondToChat,
-        askAiToTitleConversation: AskAiToTitleConversation,
+        titleConversation: AskAiToTitleConversation,
     },
 };
 

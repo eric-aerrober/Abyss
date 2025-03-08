@@ -14,6 +14,8 @@ import { ViewTablePage } from './pages/database/view-table';
 import { ViewTableRecordPage } from './pages/database/view-table-record';
 import { SettingsPage } from './pages/settings/main';
 import { useDatabaseRecordSubscription, useDatabaseTableSubscription } from './state/database-connection';
+import { ActionsPage } from './pages/actions/main';
+import { ActionCreatePage } from './pages/actions/create';
 
 export function App() {
     // Apply app theming
@@ -40,6 +42,8 @@ export function App() {
                     <Route path="/database" element={<ListTablesPage />} />
                     <Route path="/database/id/:id" element={<ViewTablePage />} />
                     <Route path="/database/id/:id/record/:recordId" element={<ViewTableRecordPage />} />
+                    <Route path="/actions" element={<ActionsPage />} />
+                    <Route path="/actions/create" element={<ActionCreatePage />} />
                     <Route path="*" element={<MainPage />} />
                 </Routes>
             </BrowserRouter>

@@ -91,7 +91,6 @@ model RenderedConversationThread {
   updatedAt     DateTime @updatedAt
 }
 
-
 // A model call to an API captured
 model ApiCall {
   id            String   @id @default(uuid())
@@ -109,6 +108,23 @@ model ApiCall {
   // Status of the API call
   status        String
 
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Actions that are specifically defined in the system that the model can call
+model ActionDefinitions {
+
+  // Identity of this action    
+  id            String   @id @default(uuid())
+  name          String
+  description   String?
+
+  // Actions can take different types
+  type          String
+  data          Json?
+
+  // Time
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

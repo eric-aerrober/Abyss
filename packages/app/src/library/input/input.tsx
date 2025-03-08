@@ -15,49 +15,53 @@ interface InputProps {
 
 export const Input = ({ value, onChange, label, placeholder, type = 'text', options, onKeyDown }: InputProps) => {
     return (
-        <div className="mb-4">
-            {label && <label className="block text-sm font-medium text-text-300 mb-2">{label}</label>}
-            <input
-                type={type}
-                value={value}
-                onChange={e => onChange(e.target.value)}
-                placeholder={placeholder}
-                onKeyDown={onKeyDown}
-                className="w-full p-2 border border-background-light rounded-md text-text-200 bg-background-dark"
-            />
-            {options && (
-                <div className="flex gap-2 mt-2">
-                    {options.map(option => (
-                        <button
-                            key={option.id}
-                            onClick={() => onChange(option.id)}
-                            className={`px-3 py-1 text-sm rounded-md transition-colors ${
-                                value === option.id
-                                    ? 'border border-background-light bg-background-dark'
-                                    : 'border border-background-light hover:bg-background-dark'
-                            }`}
-                        >
-                            {option.name}
-                        </button>
-                    ))}
-                </div>
-            )}
+        <div className="flex flex-col gap-1 mb-1">
+            {label && <label className="text-sm text-text-300">{label}</label>}
+            <div className="w-[300px]">
+                <input
+                    type={type}
+                    value={value}
+                    onChange={e => onChange(e.target.value)}
+                    placeholder={placeholder}
+                    onKeyDown={onKeyDown}
+                    className="w-full bg-background-dark text-text-200 border border-background-light rounded px-2 py-1 text-sm focus:outline-none focus:border-primary-700"
+                />
+                {options && (
+                    <div className="flex gap-2 mt-2">
+                        {options.map(option => (
+                            <button
+                                key={option.id}
+                                onClick={() => onChange(option.id)}
+                                className={`px-3 py-1 text-sm rounded-md transition-colors ${
+                                    value === option.id
+                                        ? 'border border-background-light bg-background-dark'
+                                        : 'border border-background-light hover:bg-background-dark'
+                                }`}
+                            >
+                                {option.name}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
 
 export const InputArea = ({ value, onChange, label, placeholder, onKeyDown }: InputProps) => {
     return (
-        <div className="mb-2">
-            {label && <label className="block text-sm font-medium text-text-300 mb-1">{label}</label>}
-            <textarea
-                value={value}
-                onChange={e => onChange(e.target.value)}
-                placeholder={placeholder}
-                onKeyDown={onKeyDown}
-                rows={7}
-                className="w-full p-2 border border-background-light rounded-md text-text-200 bg-background-dark"
-            />
+        <div className="flex flex-col gap-1">
+            {label && <label className="text-sm text-text-300">{label}</label>}
+            <div className="w-[300px]">
+                <textarea
+                    value={value}
+                    onChange={e => onChange(e.target.value)}
+                    placeholder={placeholder}
+                    onKeyDown={onKeyDown}
+                    rows={7}
+                    className="w-full bg-background-dark text-text-200 border border-background-light rounded px-2 py-1 text-sm focus:outline-none focus:border-primary-700"
+                />
+            </div>
         </div>
     );
 };
